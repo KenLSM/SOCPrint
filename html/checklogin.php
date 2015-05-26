@@ -6,7 +6,7 @@
 	$userPass = $_POST["password"];
 	
 	// NET_SS2 Implementation
-	/*
+	
 	include('Net/SSH2.php');
 	$ssh = new Net_SSH2($serverAddr);
 	if(!$ssh)
@@ -21,7 +21,8 @@
 	{
 		echo "OK";
 	}
-	*/
+	
+	/*
 	// SSH2 Implementation
 	if(!($con = ssh2_connect($serverAddr, $serverPort)))
 	{
@@ -38,4 +39,5 @@
 			echo "OK";
 		}
 	}
+	*/
 ?>

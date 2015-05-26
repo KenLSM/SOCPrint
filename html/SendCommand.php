@@ -10,18 +10,20 @@
 
 	$userName =  $_POST["name"];
 	$userPass = $_POST["password"];
-	$printer = $_POST["printer"];
+	$printer = ""; 	//$_POST["printer"];
 	if(!$ssh)
 	{
-		echo "Unable to establish connection\n";
+		//echo "Unable to establish connection\n";
 	}
 	if (!$ssh->login($userName, $userPass))
 	{
-		echo "Login failed";
+		//echo "Error login";
 	}
 	else
 	{
-		echo $ssh->exec('lpq -' . $printer);
+		echo "Ppsts ". $ssh->exec('lpq -Ppsts' . $printer) . "<br>";
+		echo "Ppstsb ".$ssh->exec('lpq -Ppstsb' . $printer) . "<br>";
+		echo "Ppstsc ".$ssh->exec('lpq -Ppstsc' . $printer) . "<br>";
 	}
-	echo "<br>";
+	//echo "<br>";
 ?>

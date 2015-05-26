@@ -1,43 +1,105 @@
-div 
+div, header 
 {
-	font-family: proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif!important;
+	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
 }
-div.top
+/*
+@keyframes whiteIT
+{	
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+div#loginMSG.whiteOut
 {
+ 	animation-name: whiteIT;
+	animation-duration: 2s;
+}
+div#loginMSG
+{
+	
+}
+*/
+header
+{
+	min-width: 350px;
 	width: 100%;
 	height: 2em;
-	background-color: blue;
-	box-sizing: border-box;
-	padding: 0.5em;
+	background-color: #0099FF;
 	position : fixed;
 	color: white;
 	font-size: 1em;
+	
 }
+p#serverStatus
+{ 
+	font-weight: bold;
+	margin: 0;
+	padding: 0.3em;
+}
+/*
 div#serverStatus.topText
 {
-	margin-left:33%; 
-   	margin-right:33%;
+	margin-left:11%;
 }
+*/
 input.textbox
 {
+	width: 20em;
+}
+.loginBtn
+{
+	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #0099FF;
+	font-weight: bold;
+	font-size: 1em;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #FFFF00;
+	border-radius: 5px;
+	white-space: nowrap;
+	vertical-align: middle;
+	padding:0.5em;
+	
+}
+a.loginBtn:hover
+{
+	color: #0099FF;
+	background-color: #FFFFFF;
+}
+
+td
+{
+	padding :0em;
+	aborder: 1px solid green;
+}
+
+table
+{
+	awidth: 100%;
+	aborder: 0px solid green;
+}
+div.center
+{
+	min-width: 400px;
+	height:100%;	
 	width: 100%;
-}
-button.loginBtn
-{
-	height:100%;
-}
-table.center
-{
-	margin-left:33%; 
-   	margin-right:33%;
-	border:1px;
+	margin-left:6.5%; 
+	aborder: 0px solid black;
 	padding: 0.5em;
+	background-color:white;
 }
 div.content
 {
 	text-align: left;
-	padding-top: 2em;
+	padding-top: 3.5em;
 	padding-left: 0.5em;
 }
 
-body {margin:0;padding:0}
+body 
+{
+	margin:0;
+	padding:0;
+	background-color: #CCFFFF;
+}

@@ -1,7 +1,12 @@
 <html>
 <head>
+<title>
+	SOCPrint! - Printing made simplier
+</title>
 <link rel="stylesheet" href="style.css">	
 <script type="text/javascript">
+var isLoggingIn = false;
+
 function checkServer() 
 {
 	var xmlhttp = new XMLHttpRequest();
@@ -25,24 +30,28 @@ function checkServer()
 function sendCommand()
 {
 	var xmlhttp = new XMLHttpRequest();
-	if (xmlhttp==null)
+	xmlhttp.open("POST", "SendCommand.php", true);
+	xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xmlhttp.send("name=" + document.getElementById("username").value + "&password=" + document.getElementById("password").value);
+	
+	xmlhttp.onreadystatechange = function() 
 	{
-		document.getElementById("serverStatus").innerHTML = "XMLHttpRequest not supported. Status unknown.";
-		return;
-	}
-        xmlhttp.onreadystatechange = function() 
+		if (xmlhttp.readyState == 4) 
 		{
-            if (xmlhttp.readyState == 4) 
-			{
-                document.getElementById("serverStatus").innerHTML = xmlhttp.responseText;
-            }
-        }
-	xmlhttp.open("GET", "SendCommand.php", true);
+			document.getElementById("printerStatus").innerHTML = xmlhttp.responseText;
+		}
+	}
+
 	xmlhttp.send();
 }
 function checkLogin()
 {
-	var loginMSG = document.getElementById("loginMSG");
+	var loginMSG =	 document.getElementById("loginMSG");
+	
+	if(isLoggingIn)
+	{	
+		return;		
+	}
 	
 	if(document.getElementById("login").innerHTML == "Login")
 	{
@@ -69,9 +78,11 @@ function checkLogin()
 				if(xmlhttp.responseText == "OK")
 				{
 					document.getElementById("login").innerHTML = "Disconnect";
-					
 					loginMSG.style.color = "lime";
 					loginMSG.innerHTML = "Logged in successfully";
+					document.getElementById("username").disabled = true;
+					document.getElementById("password").disabled = true;
+					sendCommand();
 				}
 				else if(xmlhttp.responseText == "WRONG")
 				{
@@ -89,8 +100,11 @@ function checkLogin()
 					loginMSG.innerHTML = "Unknown: " + xmlhttp.responseText;
 				}
 			}
+			isLoggingIn = false;
 		}
-		
+		isLoggingIn = true;		
+		loginMSG.style.color = "orange";
+		loginMSG.innerHTML = "Logging In Now";
 		xmlhttp.send("name=" + document.getElementById("username").value + "&password=" + document.getElementById("password").value);
 	}
 	else
@@ -101,30 +115,41 @@ function checkLogin()
 		
 		loginMSG.style.color = "lime";
 		loginMSG.innerHTML = "Disconnected in successfully";
+		document.getElementById("username").disabled = false;
+		document.getElementById("password").disabled = false;
 	}
 }
 </script>
 </head>
 <body onload="checkServer()">
 
-	<div class="top" >
-	<div class="topText" id="serverStatus">Server status: Checking</div>
-	</div>
+<header>
+<img src="img/logo_big.png" alt="SOCPrint!" style="width:8em;height:2em; float:left">
+<p id="serverStatus">	
+Server status: Checking
+</p>
+</header>
 <div class="content">
-<table class="center">
+<div class="center">
+<table>
 	<tr>
 		<td>
-		<div id="loginMSG">Not logged in</div>
-		<!-- <form action="SendCommand.php" method="post" style> !-->
-		<input id="username" class="textbox" type="text" name="name" placeholder="Unix ID e.g. a0123456z"><br>
+		<div id="loginMSG"><br>	</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tantc"><br>
 		<input id="password" class="textbox" type="password" name="password" placeholder="Password"><br>
 		
 		</td>
 
 		<td>
-		<button onclick="checkLogin()" class="loginBtn" type="button" id="login">Login</button>
+		<a onclick="checkLogin()" class="loginBtn" type="button" id="login">Login</a>
 		</td>
 	</tr>
+</table>
+<table>
 	<br>
 	<tr>
 		<td>
@@ -132,19 +157,23 @@ function checkLogin()
 				<tr width="100%" align="center">
 				Printer Selection
 				</tr>
+				<tr>
 				<td><input type="radio" name="printer" value="psts">psts</td>
 				<td><input type="radio" name="printer" value="psts">pstsb</td>
 				<td><input type="radio" name="printer" value="psts">pstsc</td>
+				</tr>
 			</table>
 			File: <input type="file" name="file"><br>
 		<!-- <input type="submit"> !-->
 		<td>
 	</tr>
-<td>	
-	<p>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Suggestions: <span id="txtHint"></span></p>
-</td>
+	<tr>
+		<td>
+		<div id="printerStatus"></div>
+		</td>
+	</tr>
 </table>
+</div>
 </div>
 </body>
 </html>
