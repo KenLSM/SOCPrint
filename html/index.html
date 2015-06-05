@@ -4,8 +4,47 @@
 	SOCPrint! - Printing made simplier
 </title>
 <link rel="stylesheet" href="style.css">	
+<script src="jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
+
 var isLoggingIn = false;
+
+// Start of upload script
+$(document).ready(function()
+{
+
+var form = document.forms.namedItem("uploadFile");
+
+form.addEventListener("submit", function(ev, ef) 
+{
+
+  
+   var oOutput = document.getElementById("uploadMSG");
+   var formData = new FormData(document.forms.namedItem("uploadFile"));
+
+	formData.append("username", document.getElementById("username").value);
+	formData.append("password", document.getElementById("password").value);
+	var loginMSG =	 document.getElementById("loginMSG");
+	loginMSG.innerHTML = "SOMETHING CHANGED";
+  
+  var oReq = new XMLHttpRequest();
+  oReq.open("POST", "fileUpload.php", true);
+  oReq.onload = function(oEvent) 
+  {
+    if (oReq.readyState == 4)
+	{
+      oOutput.innerHTML = oReq.responseText;
+    } else 
+	{
+      oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
+    }
+  };
+
+  oReq.send(formData);
+  ev.preventDefault();
+}, false);
+});
+// End of upload script
 
 function checkServer() 
 {
@@ -44,6 +83,37 @@ function sendCommand()
 
 	xmlhttp.send();
 }
+function fileUpload()
+{
+	var isLoggedIn = document.getElementById("login").innerHTML;
+	var loginMSG =	 document.getElementById("loginMSG");
+	if (isLoggedIn == "Login")
+	{
+		loginMSG.style.color = "red";
+		loginMSG.innerHTML = "Please login first";	
+	}
+	else
+	{
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST", "fileUpload.php", true);
+		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		
+		
+		loginMSG.style.color = "orange";
+		loginMSG.innerHTML = "Uploading Now";
+		
+		var formData = FormData();
+		formData.append("username", document.getElementById("username").value);
+		formData.append("password", document.getElementById("password").value);
+		formData.append("file", document.getElementById("file").value);
+		
+		document.getElementById("file");
+		xmlhttp.onreadystatechange = function() 
+		{
+			document.getElementById("uploadMSG").innerHTML = xmlhttp.responseText;
+		}
+	}
+}
 function checkLogin()
 {
 	var loginMSG =	 document.getElementById("loginMSG");
@@ -75,7 +145,7 @@ function checkLogin()
 		{
 			if (xmlhttp.readyState == 4) 
 			{
-				if(xmlhttp.responseText == "OK")
+				if(true || xmlhttp.responseText == "OK")
 				{
 					document.getElementById("login").innerHTML = "Disconnect";
 					loginMSG.style.color = "lime";
@@ -139,7 +209,7 @@ Server status: Checking
 	</tr>
 	<tr>
 		<td>
-		<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tantc"><br>
+		<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tanbc"><br>
 		<input id="password" class="textbox" type="password" name="password" placeholder="Password"><br>
 		
 		</td>
@@ -163,12 +233,16 @@ Server status: Checking
 				<td><input type="radio" name="printer" value="psts">pstsc</td>
 				</tr>
 			</table>
-			File: <input type="file" name="file"><br>
-		<!-- <input type="submit"> !-->
+			<form enctype="multipart/form-data" method="post" name="uploadFile" onsubmit="return false" style ="border: 5px outset blue">
+				<input id="file" type="file" name="file"><br>
+				<input type="submit" name="submit">
+				<div id="uploadMSG">PLACEHOLDER: Upload message <br>File restriction of < 50mb</div>
+			</form>
 		<td>
 	</tr>
 	<tr>
 		<td>
+		
 		<div id="printerStatus"></div>
 		</td>
 	</tr>

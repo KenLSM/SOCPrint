@@ -1,3 +1,10 @@
+<!--
+PHP Page used for checking login credentials
+Last update 5 June 2015
+
+Have not removed ssh2 implementation. Might want to remove.
+String texts are fixed. Has to be similar to index.html's js implementation.
+-->
 <?php
 
 	$serverAddr = "sunfire-r.comp.nus.edu.sg";
