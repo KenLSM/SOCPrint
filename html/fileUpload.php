@@ -83,7 +83,7 @@ Last update 5 June 2015
 		$tmp_name = $_FILES["file"]["tmp_name"];
 		$name = $_FILES["file"]["name"];
 		move_uploaded_file($tmp_name, "$uploads_dir/$name");
-		echo "<br> Upload OK!"
+		echo "<br> Upload OK!";
 	}
 	else
 	{
