@@ -190,35 +190,49 @@ function checkLogin()
 	}
 }
 </script>
+
+
 </head>
 <body onload="checkServer()">
 
 <header>
-<img src="img/logo_big.png" alt="SOCPrint!" style="width:8em;height:2em; float:left">
-<p id="serverStatus">	
-Server status: Checking
-</p>
+<table id="header">
+<tbody>
+	<tr>
+		<td>
+			<img src="img/logo_big.png" alt="SOCPrint!" style="width:12em;height:3em; float:left">
+		</td>
+		<td>
+			<p id="serverStatus">	
+				Server status: Checking
+			</p>
+		</td>
+		<td id="loginBox">
+			<table>
+				<tr id="loginStatus">
+					<td>
+						<div id="loginMSG"><br>	</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tanbc"><br>
+						<input id="password" class="textbox" type="password" name="password" placeholder="Password"><br>
+			
+					</td>
+
+					<td>
+						<a onclick="checkLogin()" class="loginBtn" type="button" id="login">Login</a>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</tbody>
+</table>
 </header>
 <div class="content">
 <div class="center">
-<table>
-	<tr>
-		<td>
-		<div id="loginMSG"><br>	</div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tanbc"><br>
-		<input id="password" class="textbox" type="password" name="password" placeholder="Password"><br>
-		
-		</td>
-
-		<td>
-		<a onclick="checkLogin()" class="loginBtn" type="button" id="login">Login</a>
-		</td>
-	</tr>
-</table>
 <table>
 	<br>
 	<tr>
