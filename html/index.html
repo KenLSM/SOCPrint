@@ -145,7 +145,7 @@ function checkLogin()
 		{
 			if (xmlhttp.readyState == 4) 
 			{
-				if(true || xmlhttp.responseText == "OK")
+				if(xmlhttp.responseText == "OK")
 				{
 					document.getElementById("login").innerHTML = "Disconnect";
 					loginMSG.style.color = "lime";
