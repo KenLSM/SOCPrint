@@ -5,6 +5,7 @@
 </title>
 <link rel="stylesheet" href="style.css">	
 <script src="jquery-2.1.4.min.js"></script>
+<script src=""
 <script type="text/javascript">
 
 var isLoggingIn = false;
@@ -46,6 +47,7 @@ form.addEventListener("submit", function(ev, ef)
 });
 // End of upload script
 
+// xmlhttp version
 function checkServer() 
 {
 	var xmlhttp = new XMLHttpRequest();
@@ -66,6 +68,7 @@ function checkServer()
 	
     
 }
+// xmlhttp version
 function sendCommand()
 {
 	var xmlhttp = new XMLHttpRequest();
@@ -80,9 +83,8 @@ function sendCommand()
 			document.getElementById("printerStatus").innerHTML = xmlhttp.responseText;
 		}
 	}
-
-	xmlhttp.send();
 }
+// xmlhttp version
 function fileUpload()
 {
 	var isLoggedIn = document.getElementById("login").innerHTML;
@@ -114,15 +116,16 @@ function fileUpload()
 		}
 	}
 }
+// Ajax version
 function checkLogin()
 {
-	var loginMSG =	 document.getElementById("loginMSG");
-	
+	var loginMSG =	 document.getElementById("loginMSG");	
+	// If is logging in, dont allow another ajax submittion, exit immediately
 	if(isLoggingIn)
 	{	
 		return;		
-	}
-	
+	}	
+	// Checks for login and pw to be both entered before submitting ajax
 	if(document.getElementById("login").innerHTML == "Login")
 	{
 		if(document.getElementById("username").value == "")
@@ -136,46 +139,54 @@ function checkLogin()
 			loginMSG.style.color = "red";
 			loginMSG.innerHTML = "Please enter your password";			
 			return;
-		}
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("POST", "checklogin.php", true);
-		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		
-		xmlhttp.onreadystatechange = function() 
-		{
-			if (xmlhttp.readyState == 4) 
-			{
-				if(xmlhttp.responseText == "OK")
+		}		
+		// Ajax to login php
+		$.ajax(
+		{ 	
+			type: 'post',
+			url: "checklogin.php",
+			data: JSON.stringify({name : document.getElementById("username").value, password : document.getElementById("password").value}),
+			success: function(data)
+			{				
+				data = JSON.parse(data);
+				switch(data)
 				{
-					document.getElementById("login").innerHTML = "Disconnect";
-					loginMSG.style.color = "lime";
-					loginMSG.innerHTML = "Logged in successfully";
-					document.getElementById("username").disabled = true;
-					document.getElementById("password").disabled = true;
-					sendCommand();
+					case "NO_CONNECTION":
+					{
+						loginMSG.style.color = "red";
+						loginMSG.innerHTML = "Unable to connect to sunfire";
+						break;
+					}
+					case "WRONG":
+					{
+						loginMSG.style.color = "red";
+						loginMSG.innerHTML = "Incorrect username or password";
+						break;
+					}
+					case "OK":
+					{
+						document.getElementById("login").innerHTML = "Disconnect";
+						loginMSG.style.color = "lime";
+						loginMSG.innerHTML = "Logged in successfully";
+						document.getElementById("username").disabled = true;
+						document.getElementById("password").disabled = true;
+						sendCommand();
+						break;
+					}
+					default :
+					{
+						loginMSG.style.color = "red";
+						loginMSG.innerHTML = "Unknown: " + data;
+						break;
+					}
 				}
-				else if(xmlhttp.responseText == "WRONG")
-				{
-					loginMSG.style.color = "red";
-					loginMSG.innerHTML = "Incorrect username or password";
-				}
-				else if(xmlhttp.responseText == "NO_CONNECTION")
-				{
-					loginMSG.style.color = "red";
-					loginMSG.innerHTML = "Unable to connect to sunfire";
-				}
-				else
-				{
-					loginMSG.style.color = "red";
-					loginMSG.innerHTML = "Unknown: " + xmlhttp.responseText;
-				}
+				// Enable login again
+				isLoggingIn = false;
 			}
-			isLoggingIn = false;
-		}
+		})	
 		isLoggingIn = true;		
 		loginMSG.style.color = "orange";
 		loginMSG.innerHTML = "Logging In Now";
-		xmlhttp.send("name=" + document.getElementById("username").value + "&password=" + document.getElementById("password").value);
 	}
 	else
 	{
