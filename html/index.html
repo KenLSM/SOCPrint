@@ -13,36 +13,68 @@ var isLoggingIn = false;
 $(document).ready(function()
 {
 
-var form = document.forms.namedItem("uploadFile");
+	var form = document.forms.namedItem("uploadFile");
 
-form.addEventListener("submit", function(ev, ef) 
-{
-
-  
-   var oOutput = document.getElementById("uploadMSG");
-   var formData = new FormData(document.forms.namedItem("uploadFile"));
-
-	formData.append("username", document.getElementById("username").value);
-	formData.append("password", document.getElementById("password").value);
-	var loginMSG =	 document.getElementById("loginMSG");
-	loginMSG.innerHTML = "SOMETHING CHANGED";
-  
-  var oReq = new XMLHttpRequest();
-  oReq.open("POST", "fileUpload.php", true);
-  oReq.onload = function(oEvent) 
-  {
-    if (oReq.readyState == 4)
+	form.addEventListener("submit", function(ev, ef) 
 	{
-      oOutput.innerHTML = oReq.responseText;
-    } else 
-	{
-      oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
-    }
-  };
+		var isLoggedIn = document.getElementById("login").innerHTML;
+		var loginMSG =	 document.getElementById("loginMSG");
+		if ( false & isLoggedIn == "Login")
+		{
+			loginMSG.style.color = "red";
+			loginMSG.innerHTML = "Please login first";	
+		}
+		else
+		{
+			loginMSG.innerHTML = "Uploading started";
+			
+			var oOutput = document.getElementById("uploadMSG");
+			var formData = new FormData(document.forms.namedItem("uploadFile"));
 
-  oReq.send(formData);
-  ev.preventDefault();
-}, false);
+			formData.append("username", document.getElementById("username").value);
+			formData.append("password", document.getElementById("password").value);
+			
+			$.ajax(
+			{
+				type: 'post',
+				url: 'fileUpload.php',
+				data: formData,
+				success: function(data)
+				{
+					var obj = JSON.parse(data);
+					
+					switch(obj.status)
+					{
+						case "OK":
+						oOutput.innerHTML = "You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType;
+						break;
+						default:
+							oOutput.innerHTML = "Unsuccessful: "+ obj.status;
+						break;
+					}
+				},
+				contentType: false,
+				processData: false
+			})
+			/*
+			var oReq = new XMLHttpRequest();
+			oReq.open("POST", "fileUpload.php", true);
+			oReq.onload = function(oEvent) 
+			{
+				if (oReq.readyState == 4)
+				{
+					oOutput.innerHTML = oReq.responseText;
+				} else 
+				{
+					oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
+				}
+			};
+			*/
+		}
+		//	oReq.send(formData);
+		ev.preventDefault();
+	}, false);
+	
 });
 // End of upload script
 
@@ -257,8 +289,8 @@ function checkLogin()
 				<td><input type="radio" name="printer" value="psts">pstsc</td>
 				</tr>
 			</table>
-			<form enctype="multipart/form-data" method="post" name="uploadFile" onsubmit="return false" style ="border: 5px outset blue">
-				<input id="file" type="file" name="file"><br>
+			<form method="post" name="uploadFile" onsubmit="return false" style ="border: 5px outset blue">
+				<input id="file" type="file" name="file" required><br>
 				<input type="submit" name="submit">
 				<div id="uploadMSG">PLACEHOLDER: Upload message <br>File restriction of < 50mb</div>
 			</form>

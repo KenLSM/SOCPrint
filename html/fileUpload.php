@@ -1,10 +1,10 @@
-<!--
-PHP Page used for uploading file
-Last update 5 June 2015
--->
+
 
 <?php
-
+/*
+PHP Page used for uploading file
+Last update 5 June 2015
+*/
 	// Snippet obtained from http://php.net/manual/de/function.filesize.php
 	function formatBytes($bytes, $precision = 2) 
 	{ 
@@ -52,12 +52,12 @@ Last update 5 June 2015
 		} 
 		return $message; 
 	} 
-	
-	include('Net/SFTP.php');
-	
 	// End snippet
 	
+	
+	
 	// Setting up params
+	
 	$userName =  $_POST["username"];
 	$userPass = $_POST["password"];
 	$uploads_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads";
@@ -66,9 +66,8 @@ Last update 5 June 2015
 	$fileName = $_FILES["file"]["name"];
 	$fileSize = $_FILES["file"]["size"];
 	$fileType = $_FILES["file"]["type"];
-	// Printing out debug message
-	echo "You uploaded: " . $fileName . "<br> Size of " . formatBytes($fileSize) . "ext of " . $fileType ;
-
+	
+	$fileSize = formatBytes($fileSize);
 	
 	// Might need to do some security checking here
 		// Check for 
@@ -76,21 +75,28 @@ Last update 5 June 2015
 		// extension type if is valid type. Dont process if invalid file type. Can detect in client side
 		// size is < than 50mb?
 	
-	
-	
+	// Refactored code
 	// If no problems with uploading 
+	
+	$message = "";
 	if ($_FILES["file"]["error"] == UPLOAD_ERR_OK) 
 	{
 		$tmp_name = $_FILES["file"]["tmp_name"];
 		move_uploaded_file($tmp_name, "$uploads_dir/$fileName");
-		echo "<br> Upload to server OK!";
-		uploadToSunfire($userName, $userPass, $uploads_dir, $fileName);
+		$message = "OK";
+		//uploadToSunfire($userName, $userPass, $uploads_dir, $fileName);
 	}
 	else
 	{
-		echo "<br>Upload error: " . codeToMessage($_FILES["file"]["error"]);
+		$message = codeToMessage($_FILES["file"]["error"]);
 	}
-	
+	$array = array("fileName" => $fileName, "fileSize" => $fileSize, "fileType" => $fileType, "status" => $message);
+	echo json_encode($array);
+	// End refactor
+
+
+	/*
+	//include('Net/SFTP.php');
 	function uploadToSunfire($userName, $userPass, $uploads_dir, $fileName)
 	{
 		// upload to sunfire from server
@@ -122,4 +128,5 @@ Last update 5 June 2015
 		echo "<br> File is name is SOCPRINT_UPLOAD$fileName";
 		
 	}
+	*/
 ?>
