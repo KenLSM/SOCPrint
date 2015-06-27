@@ -47,6 +47,7 @@ $(document).ready(function()
 					{
 						case "OK":
 						oOutput.innerHTML = "You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType;
+						uploadToSunfire(obj.fileName);
 						break;
 						default:
 							oOutput.innerHTML = "Unsuccessful: "+ obj.status;
@@ -76,6 +77,38 @@ $(document).ready(function()
 	}, false);
 	
 });
+
+function uploadToSunfire(fileName)
+{
+	var oOutput = document.getElementById("uploadMSG");
+	oOutput.innerHTML = "Uploading to sunfire now...";
+	var formData = new FormData();
+	formData.append("username", document.getElementById("username").value);
+	formData.append("password", document.getElementById("password").value);
+	formData.append("fileName", fileName);
+	$.ajax(
+	{
+		type: 'post',
+		url: 'uploadToServer.php',
+		data: formData,
+		success: function(data)
+		{
+			var obj = JSON.parse(data);
+			
+			switch(obj.status)
+			{
+				case "OK":
+				oOutput.innerHTML = "Upload complete.............." + obj.verbose;
+				break;
+				default:
+					oOutput.innerHTML = "Unsuccessful: "+ obj.status;
+				break;
+			}
+		},
+		contentType: false,
+		processData: false
+	})
+}
 // End of upload script
 
 // xmlhttp version

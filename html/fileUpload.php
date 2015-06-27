@@ -3,7 +3,7 @@
 <?php
 /*
 PHP Page used for uploading file
-Last update 5 June 2015
+Last update 26 June 2015
 */
 	// Snippet obtained from http://php.net/manual/de/function.filesize.php
 	function formatBytes($bytes, $precision = 2) 
