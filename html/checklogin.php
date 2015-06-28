@@ -13,7 +13,7 @@
 	$userPass = $data["password"];
 	
 	// NET_SS2 Implementation
-	$message = "No message";
+	$message = "";
 	include('Net/SSH2.php');
 	$ssh = new Net_SSH2($serverAddr);
 	if(!$ssh)

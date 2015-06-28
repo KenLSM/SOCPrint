@@ -30,7 +30,7 @@
 	{
 		$message = "OK";
 		$fullDir = "$uploads_dir/$fileName";
-		$sftp->put("SOCPRINT_UPLOAD" . $fileName, $fullDir, NET_SFTP_LOCAL_FILE);
+		$sftp->put("SP_UP_$fileName", $fullDir, NET_SFTP_LOCAL_FILE);
 	}
 
 	// puts a three-byte file named filename.remote on the SFTP server
@@ -39,6 +39,6 @@
 	// where x is the size of filename.local
 	//$sftp->put('filename.remote', 'temp.txt');//, NET_SFTP_LOCAL_FILE);
 	
-	$array = array("verbose" => "File is name is SOCPRINT_UPLOAD$fileName", "status" => $message);
+	$array = array("verbose" => "File is name is SP_UP_$fileName", "status" => $message);
 	echo json_encode($array);
 ?>

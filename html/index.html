@@ -28,7 +28,7 @@ $(document).ready(function()
 		{
 			loginMSG.innerHTML = "Uploading started";
 			
-			var oOutput = document.getElementById("uploadMSG");
+			var oOutput = document.getElementById("uploadServer");
 			var formData = new FormData(document.forms.namedItem("uploadFile"));
 
 			formData.append("username", document.getElementById("username").value);
@@ -46,11 +46,11 @@ $(document).ready(function()
 					switch(obj.status)
 					{
 						case "OK":
-						oOutput.innerHTML = "You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType;
+						oOutput.innerHTML = "Upload: You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType;
 						uploadToSunfire(obj.fileName);
 						break;
 						default:
-							oOutput.innerHTML = "Unsuccessful: "+ obj.status;
+							oOutput.innerHTML = "Upload: Unsuccessful: "+ obj.status;
 						break;
 					}
 				},
@@ -80,7 +80,7 @@ $(document).ready(function()
 
 function uploadToSunfire(fileName)
 {
-	var oOutput = document.getElementById("uploadMSG");
+	var oOutput = document.getElementById("uploadSunfire");
 	oOutput.innerHTML = "Uploading to sunfire now...";
 	var formData = new FormData();
 	formData.append("username", document.getElementById("username").value);
@@ -98,11 +98,75 @@ function uploadToSunfire(fileName)
 			switch(obj.status)
 			{
 				case "OK":
-				oOutput.innerHTML = "Upload complete.............." + obj.verbose;
+				oOutput.innerHTML = "Upload Sunfire: Sucessful" + obj.verbose;
+				convertToPS(fileName);
 				break;
 				default:
-					oOutput.innerHTML = "Unsuccessful: "+ obj.status;
+					oOutput.innerHTML = "Upload Sunfire: Unsuccessful: "+ obj.status;
 				break;
+			}
+		},
+		contentType: false,
+		processData: false
+	})
+}
+
+function convertToPS(fileName)
+{
+	var oOutput = document.getElementById("uploadConvertPS");
+	oOutput.innerHTML = "Converting to PS...";
+	var formData = new FormData();
+	formData.append("username", document.getElementById("username").value);
+	formData.append("password", document.getElementById("password").value);
+	formData.append("fileName", fileName);
+	$.ajax(
+	{
+		type: 'post',
+		url: 'doPDFToPS.php',
+		data: formData,
+		success: function(data)
+		{
+			var obj = JSON.parse(data);
+			
+			switch(obj.status)
+			{
+				case "OK":
+				oOutput.innerHTML = "PDFToPS: Successful " + obj.verbose;
+				doPrint(fileName);
+				break;
+				default:
+					oOutput.innerHTML = "PDFToPS: Unsuccessful: "+ obj.status + obj.error + obj.verbose;
+				break;
+			}
+		},
+		contentType: false,
+		processData: false
+	})
+}
+function doPrint(fileName)
+{
+	var oOutput = document.getElementById("uploadPrint");
+	oOutput.innerHTML = "Sending print job";
+	var formData = new FormData();
+	formData.append("username", document.getElementById("username").value);
+	formData.append("password", document.getElementById("password").value);
+	formData.append("fileName", fileName);
+	$.ajax(
+	{
+		type: 'post',
+		url: 'doPrint.php',
+		data: formData,
+		success: function(data)
+		{
+			var obj = JSON.parse(data);
+			
+			if(obj.status == "")
+			{
+				oOutput.innerHTML = "Print: Successful. Collect it at psts~";
+			}
+			else			
+			{	
+			oOutput.innerHTML = "Print: Unsuccessful: "+ obj.status;
 			}
 		},
 		contentType: false,
@@ -324,8 +388,12 @@ function checkLogin()
 			</table>
 			<form method="post" name="uploadFile" onsubmit="return false" style ="border: 5px outset blue">
 				<input id="file" type="file" name="file" required><br>
-				<input type="submit" name="submit">
-				<div id="uploadMSG">PLACEHOLDER: Upload message <br>File restriction of < 50mb</div>
+				<input type="submit" name="Print it!">
+				<div>Notice: this application prints your pdf documents and consumes your available quotas. Upload message <br>File restriction of < 2mb and pdf files only</div>
+				<div id="uploadServer"></div>
+				<div id="uploadSunfire"></div>
+				<div id="uploadConvertPS"></div>
+				<div id="uploadPrint"></div>
 			</form>
 		<td>
 	</tr>	
