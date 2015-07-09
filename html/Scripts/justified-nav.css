@@ -80,6 +80,10 @@ dy {
 	padding:0.5em;
 	
 }
+.loginBtn#login:hover{
+	color: #0099FF;
+	background-color: #FFFFFF;
+}
 p#serverStatus a.red{
 	color: #FF0000;
 	text-decoration: none;
