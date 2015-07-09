@@ -4,14 +4,14 @@
 	SOCPrint! - Printing made simplier
 </title>
 <link rel="stylesheet" href="style.css">	
-<script src="jquery-2.1.4.min.js"></script>
+<script src="/Scripts/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 
 var isLoggingIn = false;
 
 // Start of upload script
 $(document).ready(function()
-{
+{	
 
 	var form = document.forms.namedItem("uploadFile");
 
@@ -57,22 +57,7 @@ $(document).ready(function()
 				contentType: false,
 				processData: false
 			})
-			/*
-			var oReq = new XMLHttpRequest();
-			oReq.open("POST", "fileUpload.php", true);
-			oReq.onload = function(oEvent) 
-			{
-				if (oReq.readyState == 4)
-				{
-					oOutput.innerHTML = oReq.responseText;
-				} else 
-				{
-					oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
-				}
-			};
-			*/
 		}
-		//	oReq.send(formData);
 		ev.preventDefault();
 	}, false);
 	
@@ -209,38 +194,6 @@ function sendCommand()
 		if (xmlhttp.readyState == 4) 
 		{
 			document.getElementById("printerStatus").innerHTML = xmlhttp.responseText;
-		}
-	}
-}
-// xmlhttp version
-function fileUpload()
-{
-	var isLoggedIn = document.getElementById("login").innerHTML;
-	var loginMSG =	 document.getElementById("loginMSG");
-	if (isLoggedIn == "Login")
-	{
-		loginMSG.style.color = "red";
-		loginMSG.innerHTML = "Please login first";	
-	}
-	else
-	{
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("POST", "fileUpload.php", true);
-		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		
-		
-		loginMSG.style.color = "orange";
-		loginMSG.innerHTML = "Uploading Now";
-		
-		var formData = FormData();
-		formData.append("username", document.getElementById("username").value);
-		formData.append("password", document.getElementById("password").value);
-		formData.append("file", document.getElementById("file").value);
-		
-		document.getElementById("file");
-		xmlhttp.onreadystatechange = function() 
-		{
-			document.getElementById("uploadMSG").innerHTML = xmlhttp.responseText;
 		}
 	}
 }

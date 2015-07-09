@@ -23,10 +23,8 @@
 	}
 	else
 	{
-		
-		$message = "print job submitted";
 		// Command for execution in sunfire: pdftops [input file] [output file]
-		$message  = $ssh->exec("lpr -P psts SP_PS_$fileName.ps");
+		//$message  = $ssh->exec("lpr -P psts SP_PS_$fileName.ps");
 		
 		// Throw away
 		/*
