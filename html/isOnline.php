@@ -13,10 +13,10 @@ Last update 17 MAY 2015
 	$ssh = new Net_SSH2($serverAddr);	
 	if(!$ssh)
 	{
-		echo "Server status: <color=\"red\">Offline</>";
+		echo "Server status: <a class=\"red\">Offline</a>";
 	} else 
 	{
-		echo "Server status: <a color=\"green\">Online</a>";
+		echo "Server status: <a class=\"green\">Online</a>";
 	}
 	
 	/// SSH2 Implementation

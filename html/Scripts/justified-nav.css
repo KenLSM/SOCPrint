@@ -1,9 +1,92 @@
+div, header, a, p 
+{
+	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+}
+header
+{
+	min-width: 1200px;
+	width: 100%;
+	height: 9em;
+	background-color: #2D6A8C;
+	position : fixed;
+	color: white;
+	font-size: 1em;	
+}
+.bheader
+{
+	height: 10em;
+}
+table#header {
+	width:100%;
+	color: white;
+}
+
+table#header tr, td {
+	width: auto;
+}
+
+td#loginBox {
+	width: 20%;
+	padding-right: 1em;
+}
+
+p#serverStatus
+{ 
+	font-weight: bold;
+	margin: 0;
+	padding: 0.3em;
+}
+input.textbox
+{
+	width: 20em;
+	border-radius: 3px 3px 3px 3px;
+	background-color: 2D6A8C;
+	color: white;
+	padding-left: 10px;
+	border: 2px solid #3BA2AC;
+	height: 2.3em;
+	margin: 1px;
+
+}
+tr#loginStatus
+{
+	font-size: 50%;
+	height: 1em;
+	padding: 0;
+	margin: 0;
+}
 h6 {
 	color: silver;
 	text-align: right;
 }
 dy {
       padding-top: 20px;
+}
+
+.loginBtn#login
+{
+	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #3BA2AC;
+	font-weight: bold;
+	font-size: 2em;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #296A7B;
+	border-radius: 5px;
+	white-space: nowrap;
+	vertical-align: middle;
+	padding:0.5em;
+	
+}
+p#serverStatus a.red{
+	color: #FF0000;
+	text-decoration: none;
+}
+p#serverStatus a.green{
+	color: #00FF00;
+	text-decoration: none;
 }
 
 .footer {
@@ -70,38 +153,4 @@ dy {
  .nav-justified > li:last-child > a {
        border-bottom: 0;
          border-radius: 0 0 5px 5px;
- }
-
- @media (min-width: 768px) {
-       .nav-justified {
-               max-height: 52px;
-                 }
-                   .nav-justified > li > a {
-                           border-right: 1px solid #d5d5d5;
-                               border-left: 1px solid #fff;
-                                 }
-                                   .nav-justified > li:first-child > a {
-                                           border-left: 0;
-                                               border-radius: 5px 0 0
-                                               5px;
-                                                 }
-                                                   .nav-justified >
-                                                   li:last-child > a {
-                                                           border-right:
-                                                           0;
-                                                               border-radius:
-                                                               0 5px 5px
-                                                               0;
-                                                                 }
- }
-
- /* Responsive: Portrait tablets and up */
- @media screen and (min-width: 768px) {
-       /* Remove the padding we set earlier */
-         .masthead,
-           .marketing,
-             .footer {
-                     padding-right: 0;
-                         padding-left: 0;
-                           }
  }

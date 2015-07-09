@@ -1,10 +1,19 @@
 <html>
 <head>
+    <!-- Bootstrap core CSS -->
+    <link href="Scripts/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="Scripts/justified-nav.css" rel="stylesheet">
+    
+    <!--<link rel="stylesheet" href="style.css"> -->
 <title>
 	SOCPrint! - Printing made simplier
 </title>
-<link rel="stylesheet" href="style.css">	
+
 <script src="/Scripts/jquery-2.1.4.min.js"></script>
+
+
 <script type="text/javascript">
 
 var isLoggingIn = false;
@@ -287,23 +296,29 @@ function checkLogin()
 </head>
 <body onload="checkServer()">
 
+
+
 <header>
 <table id="header">
 <tbody>
 	<tr>
 		<td>
-			<img src="img/logo_big.png" alt="SOCPrint!" style="width:12em;height:3em; float:left">
+			<img src="img/logo_big.png" alt="SOCPrint!" style="width:24em;height:6em; float:left">
 		</td>
 		<td>
+			<h2>
 			<p id="serverStatus">	
 				Server status: Checking
 			</p>
+			</h2>
 		</td>
 		<td id="loginBox">
 			<table>
 				<tr id="loginStatus">
 					<td>
+					<h6>
 						<div id="loginMSG"><br>	</div>
+					</h6>
 					</td>
 				</tr>
 				<tr>
@@ -319,47 +334,54 @@ function checkLogin()
 				</tr>
 			</table>
 		</td>
+		</div>
 	</tr>
 </tbody>
 </table>
 </header>
-<div class="content">
-<div class="center">
-<table>
-	<br>
-	<tr>
-		<td>
-			<table>
-				<tr width="100%" align="center">
-				Printer Selection
-				</tr>
-				<tr>
-				<td><input type="radio" name="printer" value="psts">psts</td>
-				<td><input type="radio" name="printer" value="psts">pstsb</td>
-				<td><input type="radio" name="printer" value="psts">pstsc</td>
-				</tr>
-			</table>
-			<form method="post" name="uploadFile" onsubmit="return false" style ="border: 5px outset blue">
-				<input id="file" type="file" name="file" required><br>
-				<input type="submit" name="Print it!">
-				<div>Notice: this application prints your pdf documents and consumes your available quotas. Upload message <br>File restriction of < 2mb and pdf files only</div>
-				<div id="uploadServer"></div>
-				<div id="uploadSunfire"></div>
-				<div id="uploadConvertPS"></div>
-				<div id="uploadPrint"></div>
-			</form>
-		<td>
-	</tr>	
-</table>
-<table>
-	<tr>
-		<td>
-		
-		<div id="printerStatus">Printer status and quota will be available after login.</div>
-		</td>
-	</tr>
-</table>
+
+<div class="container" >
+<!-- background header to create space for the div below, else the text would get behind the fixed header -->
+<div class="bheader"></div>
+
+<div class="col-lg-6">
+<div id="printerStatus">Printer status and quota will be available after login.</div>
 </div>
+<div class="col-lg-6">
+	<form method="post" name="uploadFile" onsubmit="return false">
+		<input id="file" type="file" name="file" required><br>
+		<input type="submit" value="Print it!">
+		<div>Notice: this application prints your pdf documents and consumes your available quotas. Upload message <br>File restriction of < 2mb and pdf files only</div>
+		<div id="uploadServer"></div>
+		<div id="uploadSunfire"></div>
+		<div id="uploadConvertPS"></div>
+		<div id="uploadPrint"></div>
+	</form>
+</div>
+
+<div>
+	<h2>Printer Selection</h2>
+	<div class="col-lg-4" style="border:1px solid silver">
+
+			<input type="radio" name="printer" value="psts">
+			<h2>psts</h2>
+			<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+	</div>
+	<div class="col-lg-4" style="border:1px solid silver">
+
+			<input type="radio" name="printer" value="psts">
+			<h2>pstsb</h2>
+			<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+	</div>
+	<div class="col-lg-4" style="border:1px solid silver">
+
+			<input type="radio" name="printer" value="psts">
+			<h2>pstsc</h2>
+			<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+	</div>
+</div>
+
+
 </div>
 </body>
 </html>
