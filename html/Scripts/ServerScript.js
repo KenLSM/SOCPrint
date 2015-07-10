@@ -1,8 +1,14 @@
 var isLoggingIn = false;
 // Start of upload script
+var temp_counter = 0;
+function temp()
+{
+		temp_counter++;
+		document.getElementById("tempCounter").innerHTML = temp_counter + "s since last refresh";
+		setTimeout(temp,1000);
+}
 $(document).ready(function()
 {	
-
 	var form = document.forms.namedItem("uploadFile");
 
 	form.addEventListener("submit", function(ev, ef) 
@@ -174,17 +180,56 @@ function checkServer()
 // xmlhttp version
 function sendCommand()
 {
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open("POST", "SendCommand.php", true);
-	xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xmlhttp.send("name=" + document.getElementById("username").value + "&password=" + document.getElementById("password").value);
-	
-	xmlhttp.onreadystatechange = function() 
+	var formData = new FormData();
+	formData.append("username", document.getElementById("username").value);
+	formData.append("password", document.getElementById("password").value);
+	$.ajax(
 	{
-		if (xmlhttp.readyState == 4) 
+		type: 'post',
+		url: 'SendCommand.php',
+		data: formData,
+		success: function(data)
 		{
-			document.getElementById("printerStatus").innerHTML = xmlhttp.responseText;
-		}
+			var obj = JSON.parse(data);
+			
+			switch(obj.message)
+			{
+				case "OK":
+				document.getElementById("ppsts").innerHTML = obj.Ppsts;
+				document.getElementById("ppstsb").innerHTML = obj.Ppstsb;
+				document.getElementById("ppstsc").innerHTML = obj.Ppstsc;
+				
+				document.getElementById("paperUsage").innerHTML = obj.paperUsage;
+				document.getElementById("availQuota").innerHTML = obj.availQuota;
+				document.getElementById("quotaTopup").innerHTML = obj.quotaTopup;
+				document.getElementById("overdraft").innerHTML = obj.overdraft;
+				
+				
+				/*----------------				
+				Progress bar 
+				----------------*/
+				var sum =  Number(obj.paperUsage.replace("pages","")) +  Number(obj.availQuota.replace("pages","")) + Number(obj.quotaTopup.replace("pages","")) + Number(obj.overdraft.replace("pages",""));
+				
+				document.getElementById("paperUsageBarSuc").style.width = Number(obj.availQuota/sum) * 100 + "%";
+				document.getElementById("paperUsageBarInfo").style.width = Number(obj.quotaTopup/sum) * 100 + "%";
+				document.getElementById("paperUsageBarWar").style.width = Number(obj.overdraft/sum) * 100 + "%";
+				document.getElementById("paperUsageBarDan").style.width = Number(obj.paperUsage/sum) * 100 + "%";
+				
+				
+				break;
+				
+				default:
+				document.getElementById("printerStatus").innerHTML = "wrong";
+				break;
+			}
+		},
+		contentType: false,
+		processData: false
+	})
+	if(document.getElementById("login").innerHTML == "Disconnect")
+	{
+		 temp_counter = 0;
+		setTimeout(sendCommand, 5000);
 	}
 }
 // Ajax version
@@ -241,7 +286,8 @@ function checkLogin()
 						loginMSG.innerHTML = "Logged in successfully";
 						document.getElementById("username").disabled = true;
 						document.getElementById("password").disabled = true;
-						sendCommand();
+						setTimeout(sendCommand, 5000);
+						temp();
 						break;
 					}
 					default :

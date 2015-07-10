@@ -130,53 +130,83 @@
 
 <div class="container" >
 <!-- background header to create space for the div below, else the text would get behind the fixed header -->
-<div class="bheader"></div>
 
-<div class="col-lg-6">
-	<div id="printerStatus">
-		<div class="progress">
-			<div class="progress-bar progress-bar-success" role="progressbar"style="width: 10%">
-			<p color="red">asd</p>
-			</div>
+<div class="row">
+
+<div class="col-lg-12">
+	<div class="col-lg-6">
+		<div id="printerStatus">
+			Printer status and quota will be populated after login. <a class="lightgreen" id="tempCounter"></a>
 		</div>
-		Printer status and quota will be available after login.
+		<div>
+			<div class="progress" id="paperUsageBar">
+				<div class="progress-bar progress-bar-danger progress-bar-striped" id = "paperUsageBarDan" role="progressbar"style="width: 0%">
+				Usage
+				</div>
+				<div class="progress-bar progress-bar-success progress-bar-striped" id ="paperUsageBarSuc" role="progressbar"style="width: 0%">
+				Available
+				</div>
+				<div class="progress-bar progress-bar-info progress-bar-striped" id = "paperUsageBarInfo" role="progressbar"style="width: 0%">
+				Topup Quota
+				</div>
+				<!-- width set to 2000% to hide text -->
+				<div class="progress-bar progress-bar-warning progress-bar-striped active" id = "paperUsageBarWar" role="progressbar"style="width: 2000%">
+				Overdraft
+				</div>
+			</div>
+			Paper usage: <a class="red" id = "paperUsage">0</a>
+			<br>
+			Available quota: <a class="lightgreen" id="availQuota">0</a>
+			<br>
+			quotaTopup: <a class="lightblue" id="quotaTopup">0</a>
+			<br>
+			overdraft: <a class="orange" id ="overdraft">0</a>
+		</div>
 	</div>
-</div>
-<div class="col-lg-6">
-	<form method="post" name="uploadFile" onsubmit="return false">
-		<input id="file" type="file" name="file" required><br>
-		<input type="submit" value="Print it!">
-		<div>Notice: this application prints your pdf documents and consumes your available quotas. Upload message <br>File restriction of < 2mb and pdf files only</div>
-		<div id="uploadServer"></div>
-		<div id="uploadSunfire"></div>
-		<div id="uploadConvertPS"></div>
-		<div id="uploadPrint"></div>
-	</form>
+	<div class="col-lg-6">
+		<form method="post" name="uploadFile" onsubmit="return false">
+			<input id="file" type="file" name="file" required><br>
+			<input type="submit" value="Print it!">
+			<div>Notice: this application prints your pdf documents and consumes your available quotas. Upload message <br>File restriction of < 2mb and pdf files only</div>
+			<div id="uploadServer"></div>
+			<div id="uploadSunfire"></div>
+			<div id="uploadConvertPS"></div>
+			<div id="uploadPrint"></div>
+		</form>
+
+	</div>
 </div>
 
 <div>
 	<h2>Printer Selection</h2>
 	<div class="col-lg-4" style="border:1px solid silver">
 
-			<input type="radio" name="printer" value="psts">
-			<h2>psts</h2>
-			<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+		<input type="radio" name="printer" value="psts">
+		<h2>psts - Level 1</h2>
+		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+		<p id = "ppsts"> things </p>
 	</div>
 	<div class="col-lg-4" style="border:1px solid silver">
 
-			<input type="radio" name="printer" value="psts">
-			<h2>pstsb</h2>
-			<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+		<input type="radio" name="printer" value="psts">
+		<h2>pstsb - Level 1</h2>
+		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+		<p id = "ppstsb"> things </p>
 	</div>
 	<div class="col-lg-4" style="border:1px solid silver">
 
-			<input type="radio" name="printer" value="psts">
-			<h2>pstsc</h2>
-			<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+		<input type="radio" name="printer" value="psts">
+		<h2>pstsc - Level 1</h2>
+		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+		<p id = "ppstsc"> things </p>
 	</div>
 </div>
 
 
+</div>
+<footer class="footer">
+<h5>Thanks for using SOCPrint! &copy; 2015 | <a href="#">About</a></h5>
+</footer>
 </div>
 </body>
 </html>

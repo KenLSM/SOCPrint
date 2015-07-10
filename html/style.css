@@ -1,114 +1,16 @@
-div, header 
-{
-	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
-}
-/*
-@keyframes whiteIT
-{	
-	0% {opacity: 0;}
-	100% {opacity: 1;}
-}
 
-div#loginMSG.whiteOut
-{
- 	animation-name: whiteIT;
-	animation-duration: 2s;
-}
-div#loginMSG
-{
-	
-}
-*/
-header
-{
-	min-width: 350px;
-	width: 100%;
-	height: 5em;
-	background-color: #2D6A8C;
-	position : fixed;
-	color: white;
-	font-size: 1em;
-	
-}
-table#header {
-	width:100%;
-	color: white;
-}
 
-table#header tr, td {
-	width: auto;
-}
-
-td#loginBox {
-	width: 20%;
-	padding-right: 1em;
-}
-
-p#serverStatus
-{ 
-	font-weight: bold;
-	margin: 0;
-	padding: 0.3em;
-	width: 30em;
-}
-/*
-div#serverStatus.topText
-{
-	margin-left:11%;
-}
-*/
-input.textbox
-{
-	width: 20em;
-	border-radius: 3px 3px 3px 3px;
-	background-color: 2D6A8C;
-	color: white;
-	padding-left: 10px;
-	border: 2px solid #3BA2AC;
-	height: 2.3em;
-	margin: 1px;
-
-}
-tr#loginStatus
-{
-	font-size: 50%;
-	height: 1em;
-	padding: 0;
-	margin: 0;
-}
-.loginBtn
-{
-	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
-	display: inline-block;
-	color: #FFFFFF;
-	background-color: #3BA2AC;
-	font-weight: bold;
-	font-size: 1em;
-	text-align: center;
-	text-decoration: none;
-	border: 1px solid #296A7B;
-	border-radius: 5px;
-	white-space: nowrap;
-	vertical-align: middle;
-	padding:0.5em;
-	
-}
-a.loginBtn:hover
-{
-	color: #0099FF;
-	background-color: #FFFFFF;
-}
 
 td
 {
 	padding :0em;
-	aborder: 1px solid green;
+	border: 1px solid green;
 }
 
 table
 {
 	awidth: 100%;
-	aborder: 0px solid green;
+	border: 0px solid green;
 }
 div.center
 {

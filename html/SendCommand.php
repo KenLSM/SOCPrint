@@ -1,46 +1,69 @@
 <?php
-
-	include('Net/SSH2.php');
-
-	define('NET_SSH2_LOGGING', NET_SSH2_LOG_COMPLEX);
+	
 	$serverAddr = "sunfire-r.comp.nus.edu.sg";
 	$serverPort = 22;
+
+
+	$userName =  $_POST["username"];
+	$userPass = $_POST["password"];
 	
+	include('Net/SSH2.php');
 	$ssh = new Net_SSH2($serverAddr);
 
-	$userName =  $_POST["name"];
-	$userPass = $_POST["password"];
-	$printer = ""; 	//$_POST["printer"];
+	$message = "";
+	$Ppsts = $userName;
+	$Ppstsb = $userPass;
+	$Ppstsc = "";
+	$paperUsage ="";
+	$availQuota ="";
+	$quotaTopup ="";
+	$overdraft ="";
+	
 	if(!$ssh)
 	{
-		//echo "Unable to establish connection\n";
+		$message = "NO_CONNECTION";
 	}
 	if (!$ssh->login($userName, $userPass))
 	{
-		//echo "Error login";
+		$message = "WRONG";
 	}
 	else
 	{
-		echo "Ppsts ". $ssh->exec('lpq -Ppsts' . $printer) . "<br>";
-		echo "Ppstsb ".$ssh->exec('lpq -Ppstsb' . $printer) . "<br>";
-		echo "Ppstsc ".$ssh->exec('lpq -Ppstsc' . $printer) . "<br>";
+		$message = "OK";
+		
+		$Ppsts = $ssh->exec('lpq -Ppsts');
+		$Ppstsb = $ssh->exec('lpq -Ppstsb');
+		$Ppstsc = $ssh->exec('lpq -Ppstsc');
 		// Clearing off the stream of login message
 		$ssh->read("~ \$");
 		$ssh->write("pusage \n");
 		// Throw away
 		$ssh->read("PS-printer paper usage:");
-		echo "Paper usage: " . $ssh->read("pages") . "<br>";
+		$paperUsage = $ssh->read("pages");
+		$paperUsage = str_replace("pages", "", $paperUsage);
 		
 		$ssh->read("Available quota:");
-		echo "Available quota: " . $ssh->read("pages") . "<br>";
+		$availQuota = $ssh->read("pages");
+		$availQuota = str_replace("pages", "", $availQuota);
 		
 		$ssh->read("Quota topup:");
-		echo "Quota topup: " . $ssh->read("pages") . "<br>";
+		$quotaTopup = $ssh->read("pages");
+		$quotaTopup = str_replace("pages", "", $quotaTopup);
 		
 		$ssh->read("Allow to overdraft:");
-		echo "Allow to overdraft: ". $ssh->read("pages") . "<br>";
+		$overdraft = $ssh->read("pages");
+		$overdraft = str_replace("pages", "", $overdraft);
 		
 		$ssh->read("~eprint/forms");
 	}
-	//echo "<br>";
+	$array = array(
+	"Ppsts" => $Ppsts, 
+	"Ppstsb" => $Ppstsb, 
+	"Ppstsc" => $Ppstsc,
+	"paperUsage" => $paperUsage, 
+	"availQuota" => $availQuota, 
+	"quotaTopup" => $quotaTopup, 
+	"overdraft" => $overdraft, 
+	"message" =>$message);
+	echo json_encode($array);
 ?>
