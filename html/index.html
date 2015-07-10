@@ -1,17 +1,27 @@
 <html>
 <head>
-    <!-- Bootstrap core CSS -->
-    <link href="Scripts/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="Scripts/justified-nav.css" rel="stylesheet">
-    
-    <!--<link rel="stylesheet" href="style.css"> -->
+	<script src="/Scripts/jquery-2.1.4.min.js"></script>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<!-- Custom styles for this template -->
+	<link href="Scripts/justified-nav.css" rel="stylesheet">
+
+	<!--<link rel="stylesheet" href="style.css"> -->
+	
 <title>
 	SOCPrint! - Printing made simplier
 </title>
 
-<script src="/Scripts/jquery-2.1.4.min.js"></script>
+
 
 
 <script src="/Scripts/ServerScript.js"></script>
@@ -22,20 +32,66 @@
 
 
 
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header" >
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="#"><img src="img/logo_big.png" alt="SOCPrint!" style="width:7em;"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	<h6>
+		<p id="serverStatus">	
+			Server status: Checking
+		</p>
+	</h6> <span class="sr-only">
+       </ul>
+       <ul class="nav navbar-nav navbar-right" id="loginBox">
+		<table>
+			<tr id="loginStatus">
+				<td>
+				<h6>
+					<div id="loginMSG"><br>	</div>
+				</h6>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tanbc"><br>
+					<input id="password" class="textbox" type="password" name="password" placeholder="Password"><br>
+		
+				</td>
+
+				<td>
+					<a onclick="checkLogin()" class="loginBtn" type="button" id="login">Login</a>
+				</td>
+			</tr>
+		</table>
+	</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 <header>
+<!--
 <table id="header">
 <tbody>
 	<tr>
 		<td>
 			<img src="img/logo_big.png" alt="SOCPrint!" style="width:24em;height:6em; float:left">
 		</td>
-		<td>
-			<h2>
-			<p id="serverStatus">	
-				Server status: Checking
-			</p>
-			</h2>
-		</td>
+		
 		<td id="loginBox">
 			<table>
 				<tr id="loginStatus">
@@ -58,9 +114,17 @@
 				</tr>
 			</table>
 		</td>
+		<td>
+			<h2>
+			<p id="serverStatus">	
+				Server status: Checking
+			</p>
+			</h2>
+		</td>
 		</div>
 	</tr>
 </tbody>
+-->
 </table>
 </header>
 
@@ -69,7 +133,14 @@
 <div class="bheader"></div>
 
 <div class="col-lg-6">
-<div id="printerStatus">Printer status and quota will be available after login.</div>
+	<div id="printerStatus">
+		<div class="progress">
+			<div class="progress-bar progress-bar-success" role="progressbar"style="width: 10%">
+			<p color="red">asd</p>
+			</div>
+		</div>
+		Printer status and quota will be available after login.
+	</div>
 </div>
 <div class="col-lg-6">
 	<form method="post" name="uploadFile" onsubmit="return false">
