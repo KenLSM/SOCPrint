@@ -139,6 +139,7 @@
 			 Dev text:<a class="lightgreen" id="tempCounter"></a>
 		</div>
 		<div>
+		<h5>
 			<div class="progress" id="paperUsageBar">
 				<div class="progress-bar progress-bar-success progress-bar-striped" id ="paperUsageBarSuc" role="progressbar"style="width: 0%">
 				Available
@@ -153,14 +154,16 @@
 				Printer status and quota will be populated after login.
 				</div>
 			</div>
-			Total available quota: <a class="lightgreen" id="availQuota">0</a> pages
+			Total available quota: <a class="lightgreen" id="availQuota"  data-toggle="tooltip" title="You can print this amount">0</a> pages
 			<br>
-			Overdraft: <a class="orange" id ="overdraft">0</a> pages
+			Overdraft: <a class="orange" id ="overdraft" data-toggle="tooltip" title="You can exceed paper usage by this amount">0</a> pages
 			<br>
-			Paper usage: <a class="red" id = "paperUsage">0</a> pages			
+			Paper usage: <a class="red" id = "paperUsage" data-toggle="tooltip" title="You consumed this amount">0</a> pages
+		</h5>			
 		</div>
 	</div>
 	<div class="col-lg-6">
+	<h5>
 		<form method="post" name="uploadFile" onsubmit="return false">
 			<input id="file" type="file" name="file" required><br>
 			<input type="submit" value="Print it!">
@@ -170,34 +173,44 @@
 			<div id="uploadConvertPS"></div>
 			<div id="uploadPrint"></div>
 		</form>
-
+	</h5>
 	</div>
+	
 </div>
-
-<div>
+<div class="col-lg-12 divcenter noselect">
 	<h2>Printer Selection</h2>
-	<div class="col-lg-4" style="border:1px solid silver">
-
-		<input type="radio" name="printer" value="psts">
-		<h2>psts - Level 1</h2>
-		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+	<div class="col-lg-4 divcenter" style="border:1px solid silver">
+	<a href ="#psts">
+	<h2 id="psts" class = "printerSelected">
+		Psts - Level 1
+		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:10em;">
 		<p id = "ppsts"> things </p>
+	</h2>	
+	</a>
 	</div>
-	<div class="col-lg-4" style="border:1px solid silver">
+	<div class="col-lg-4  divcenter" style="border:1px solid silver">
 
-		<input type="radio" name="printer" value="psts">
-		<h2>pstsb - Level 1</h2>
-		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+	<a href ="#pstsb">
+	<h2 id="pstsb" class = "printerSelected">
+		Pstsb - Level 1
+		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:10em;">
 		<p id = "ppstsb"> things </p>
+	</h2>	
+	</a>
+	
 	</div>
-	<div class="col-lg-4" style="border:1px solid silver">
+	<div class="col-lg-4  divcenter" style="border:1px solid silver">
 
-		<input type="radio" name="printer" value="psts">
-		<h2>pstsc - Level 1</h2>
-		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:24em;">
+	<a href ="#pstsc">
+	<h2 id="pstsc" class = "printerSelected">
+		Pstsc - Level 1
+		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:10em;">	
 		<p id = "ppstsc"> things </p>
+	</h2>	
+	</a>
 	</div>
 </div>
+
 
 
 </div>

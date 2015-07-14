@@ -7,21 +7,56 @@ function temp()
 		document.getElementById("tempCounter").innerHTML = temp_counter + "s since last refresh";
 		setTimeout(temp,1000);
 }
+
+// Function to check if printer is selected or not
+// Uses the url # data to check
+// Return true on printer selected
+// Return false if printer cannot be found
+var printer = "";
+function checkPrinterSelection()
+{
+	printer = window.location.hash.substring(1);
+	
+	switch(text)
+	{
+		case "psts":
+		return true;
+		
+		case "pstsb":
+		return true;
+		
+		case "pstsc":
+		return true;
+		
+		default:
+		return false;
+	}
+}
 $(document).ready(function()
 {	
+
 	var form = document.forms.namedItem("uploadFile");
 
 	form.addEventListener("submit", function(ev, ef) 
 	{
 		var isLoggedIn = document.getElementById("login").innerHTML;
 		var loginMSG =	 document.getElementById("loginMSG");
-		if ( false & isLoggedIn == "Login")
+		
+		// If user is  not logged in dont
+		if (isLoggedIn == "Login")
 		{
 			loginMSG.style.color = "red";
 			loginMSG.innerHTML = "Please login first";	
 		}
+		// Check if printer is selected or not
+		else if(checkPrinterSelection() == false)
+		{
+			loginMSG.style.color = "red";
+			loginMSG.innerHTML = "Please select a printer";	
+		}
 		else
 		{
+			loginMSG.style.color = "green";
 			loginMSG.innerHTML = "Uploading started";
 			
 			var oOutput = document.getElementById("uploadServer");
@@ -29,7 +64,6 @@ $(document).ready(function()
 
 			formData.append("username", document.getElementById("username").value);
 			formData.append("password", document.getElementById("password").value);
-			
 			$.ajax(
 			{
 				type: 'post',
@@ -68,6 +102,11 @@ $(document).ready(function()
         $("#login").click();
 	}
 	});
+	// end login input field script
+	
+	// to enable tooltip
+	 $('[data-toggle="tooltip"]').tooltip(); 
+	// end
 	
 });
 
@@ -144,6 +183,7 @@ function doPrint(fileName)
 	formData.append("username", document.getElementById("username").value);
 	formData.append("password", document.getElementById("password").value);
 	formData.append("fileName", fileName);
+	formData.append("printer", printer);
 	$.ajax(
 	{
 		type: 'post',
@@ -155,7 +195,7 @@ function doPrint(fileName)
 			
 			if(obj.status == "")
 			{
-				oOutput.innerHTML = "Print: Successful. Collect it at psts~";
+				oOutput.innerHTML = "Print: Successful. Collect it at " + printer";
 			}
 			else			
 			{	
@@ -202,6 +242,7 @@ function sendCommand()
 		data: formData,
 		success: function(data)
 		{
+			temp_counter = 0;
 			var obj = JSON.parse(data);
 			
 			switch(obj.message)
@@ -238,7 +279,7 @@ function sendCommand()
 	})
 	if(document.getElementById("login").innerHTML == "Disconnect")
 	{
-		 temp_counter = 0;
+		
 		setTimeout(sendCommand, 5000);
 	}
 }
@@ -333,7 +374,6 @@ function checkLogin()
 		//To make the log in field to appear
 		document.getElementById("username").style.display="initial";
 		document.getElementById("password").style.display="initial";
-
-
+		location.reload();
 	}
 }
