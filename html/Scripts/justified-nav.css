@@ -105,7 +105,7 @@ dy {
 	color: #0099FF;
 	background-color: #FFFFFF;
 }
-a{
+a:hover{
 text-decoration: none;
 }
 a.red{

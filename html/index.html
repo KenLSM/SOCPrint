@@ -136,31 +136,28 @@
 <div class="col-lg-12">
 	<div class="col-lg-6">
 		<div id="printerStatus">
-			Printer status and quota will be populated after login. <a class="lightgreen" id="tempCounter"></a>
+			 Dev text:<a class="lightgreen" id="tempCounter"></a>
 		</div>
 		<div>
 			<div class="progress" id="paperUsageBar">
-				<div class="progress-bar progress-bar-danger progress-bar-striped" id = "paperUsageBarDan" role="progressbar"style="width: 0%">
-				Usage
-				</div>
 				<div class="progress-bar progress-bar-success progress-bar-striped" id ="paperUsageBarSuc" role="progressbar"style="width: 0%">
 				Available
 				</div>
-				<div class="progress-bar progress-bar-info progress-bar-striped" id = "paperUsageBarInfo" role="progressbar"style="width: 0%">
-				Topup Quota
-				</div>
-				<!-- width set to 2000% to hide text -->
-				<div class="progress-bar progress-bar-warning progress-bar-striped active" id = "paperUsageBarWar" role="progressbar"style="width: 2000%">
+				<div class="progress-bar progress-bar-warning progress-bar-striped" id = "paperUsageBarWar" role="progressbar"style="width: 0%">
 				Overdraft
 				</div>
+				<div class="progress-bar progress-bar-danger progress-bar-striped" id = "paperUsageBarDan" role="progressbar"style="width: 0%">
+				Usage
+				</div>				
+				<div class="progress-bar progress-bar-info progress-bar-striped active" id = "paperUsageBarInfo" role="progressbar"style="width: 100%">
+				Printer status and quota will be populated after login.
+				</div>
 			</div>
-			Paper usage: <a class="red" id = "paperUsage">0</a>
+			Total available quota: <a class="lightgreen" id="availQuota">0</a> pages
 			<br>
-			Available quota: <a class="lightgreen" id="availQuota">0</a>
+			Overdraft: <a class="orange" id ="overdraft">0</a> pages
 			<br>
-			quotaTopup: <a class="lightblue" id="quotaTopup">0</a>
-			<br>
-			overdraft: <a class="orange" id ="overdraft">0</a>
+			Paper usage: <a class="red" id = "paperUsage">0</a> pages			
 		</div>
 	</div>
 	<div class="col-lg-6">

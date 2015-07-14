@@ -57,6 +57,18 @@ $(document).ready(function()
 		ev.preventDefault();
 	}, false);
 	
+	// Login input field script. To allow pressing enter to fire login event
+	$("#username").keyup(function(event){
+	if(event.keyCode == 13){
+        $("#login").click();
+	}
+	});
+	$("#password").keyup(function(event){
+	if(event.keyCode == 13){
+        $("#login").click();
+	}
+	});
+	
 });
 
 function uploadToSunfire(fileName)
@@ -201,20 +213,18 @@ function sendCommand()
 				
 				document.getElementById("paperUsage").innerHTML = obj.paperUsage;
 				document.getElementById("availQuota").innerHTML = obj.availQuota;
-				document.getElementById("quotaTopup").innerHTML = obj.quotaTopup;
 				document.getElementById("overdraft").innerHTML = obj.overdraft;
 				
 				
 				/*----------------				
 				Progress bar 
 				----------------*/
-				var sum =  Number(obj.paperUsage.replace("pages","")) +  Number(obj.availQuota.replace("pages","")) + Number(obj.quotaTopup.replace("pages","")) + Number(obj.overdraft.replace("pages",""));
+				var sum =  Number(obj.paperUsage.replace("pages","")) +  Number(obj.availQuota.replace("pages",""));
 				
-				document.getElementById("paperUsageBarSuc").style.width = Number(obj.availQuota/sum) * 100 + "%";
-				document.getElementById("paperUsageBarInfo").style.width = Number(obj.quotaTopup/sum) * 100 + "%";
+				document.getElementById("paperUsageBarSuc").style.width = Number((obj.availQuota-obj.overdraft)/sum) * 100 + "%";
 				document.getElementById("paperUsageBarWar").style.width = Number(obj.overdraft/sum) * 100 + "%";
 				document.getElementById("paperUsageBarDan").style.width = Number(obj.paperUsage/sum) * 100 + "%";
-				
+				document.getElementById("paperUsageBarInfo").style.width = "0%";
 				
 				break;
 				
