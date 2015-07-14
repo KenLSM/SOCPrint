@@ -294,8 +294,12 @@ function checkLogin()
 						document.getElementById("login").innerHTML = "Disconnect";
 						loginMSG.style.color = "lime";
 						loginMSG.innerHTML = "Logged in successfully";
-						document.getElementById("username").disabled = true;
-						document.getElementById("password").disabled = true;
+						//document.getElementById("username").disabled = true;
+						//document.getElementById("password").disabled = true;
+						//To make the log in field to disappear
+						document.getElementById("username").style.display="none";
+						document.getElementById("password").style.display="none";
+
 						setTimeout(sendCommand, 5000);
 						temp();
 						break;
@@ -323,7 +327,13 @@ function checkLogin()
 		
 		loginMSG.style.color = "lime";
 		loginMSG.innerHTML = "Disconnected successfully";
-		document.getElementById("username").disabled = false;
-		document.getElementById("password").disabled = false;
+		//document.getElementById("username").disabled = false;
+		//document.getElementById("password").disabled = false;
+
+		//To make the log in field to appear
+		document.getElementById("username").style.display="initial";
+		document.getElementById("password").style.display="initial";
+
+
 	}
 }
