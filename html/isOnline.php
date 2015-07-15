@@ -1,9 +1,9 @@
-<!--
-PHP Page used for checking server status
-Last update 17 MAY 2015
--->
 <?php
-	
+	/*
+	PHP Page used for checking server status
+	Last update 17 MAY 2015
+	*/
+
 	$serverAddr = "sunfire-r.comp.nus.edu.sg";
 	$serverPort = 22;
 	

@@ -1,41 +1,39 @@
-div, header, a, p 
-{
-	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
-	aborder: 1px solid black;
+div,
+header,
+a,
+p {
+    font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+    aborder: 1px solid black;
 }
-.divcenter
-{
-	text-align: center;
+.divcenter {
+    text-align: center;
 }
-header
-{	
-	width: 100%;
-	aheight: 9em;
-	background-color: #2D6A8C;
-	position : fixed;
-	color: white;
-	font-size: 1em;	
+header {
+    width: 100%;
+    aheight: 9em;
+    background-color: #2D6A8C;
+    position: fixed;
+    color: white;
+    font-size: 1em;
 }
-.loginBox{
-	margin-top: .5em;
-	margin-bottom: .5em;
-	margin-left: .5em;
+.loginBox {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    margin-left: .5em;
 }
-body
-{
-	background-color: #ECECEA;
+body {
+    background-color: #ECECEA;
 }
 .printerSelected {
-	cursor: pointer;
-	color: black;
-	border-radius: .2em;
-	border: 1px solid #cccccc;
-
-	-webkit-transition: border linear .2s, box-shadow linear .2s;
-	-moz-transition: border linear .2s, box-shadow linear .2s;
-	-o-transition: border linear .2s, box-shadow linear .2s;
-	transition: border linear .2s, box-shadow linear .2s;
-	transition: background-color 0.4s;
+    cursor: pointer;
+    color: black;
+    border-radius: .2em;
+    border: 1px solid #cccccc;
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    transition: background-color 0.4s;
 }
 .noselect {
     -webkit-touch-callout: none;
@@ -45,198 +43,179 @@ body
     -ms-user-select: none;
     user-select: none;
 }
-.printerSelected:target 
-{
-	text-decoration: none;
-	background-color: lemonchiffon;
-	box-shadow: inset 3px 4px #888;
+.printerSelected:target {
+    text-decoration: none;
+    background-color: lemonchiffon;
+    box-shadow: inset 3px 4px #888;
 }
-
 .navbar-nav>li {
-        float: none;
+    float: none;
 }
 .navbar-default {
-	background-image: none;
-	background-color: #2D6A8C;
-	border-color: transparent;
+    background-image: none;
+    background-color: #2D6A8C;
+    border-color: transparent;
 }
-.bheader
-{
-	height: 10em;
+.bheader {
+    height: 10em;
 }
-.progress{
-	margin-bottom: 0px;
+.progress {
+    margin-bottom: 0px;
 }
 table#header {
-	width:100%;
-	color: white;
+    width: 100%;
+    color: white;
 }
-
-table#header tr, td {
-	width: auto;
+table#header tr,
+td {
+    width: auto;
 }
-
 td#loginBox {
-	padding-right: 0em;
+    padding-right: 0em;
 }
-
-p#serverStatus
-{ 
-	font-weight: bold;
-	font-size: 65%;
-	text-align: left;
-	margin-top: 1.1em;
-	padding: 0em;
+p#serverStatus {
+    font-weight: bold;
+    font-size: 65%;
+    text-align: left;
+    margin-top: 1.1em;
+    padding: 0em;
 }
-.alert#alertBox
-{
-	background-image: none;
-	border-color: transparent;
+.alert#alertBox {
+    background-image: none;
+    border-color: transparent;
 }
-input.textbox
-{
-	width: 25em;
-	border-radius: 3px 3px 3px 3px;
-	color: black;
-	padding-left: 10px;
-	border: 2px solid #3BA2AC;
-	height: 2.5em;
-	margin: 1px;
-	font-size: 50%;
-
+input.textbox {
+    width: 25em;
+    border-radius: 3px 3px 3px 3px;
+    color: black;
+    padding-left: 10px;
+    border: 2px solid #3BA2AC;
+    height: 2.5em;
+    margin: 1px;
+    font-size: 50%;
 }
-tr#loginStatus
-{
-	font-size: 40%;
-	height: 1em;
-	padding: 0;
-	margin: 0;
+tr#loginStatus {
+    font-size: 40%;
+    height: 1em;
+    padding: 0;
+    margin: 0;
 }
-h5{
-	color: DimGrey;
-	font-size:1em;
+h5 {
+    color: DimGrey;
+    font-size: 1em;
 }
 h6 {
-	color: white;
-	text-align: right;
-	font-size: 2em;
+    color: white;
+    text-align: right;
+    font-size: 2em;
 }
 dy {
-      padding-top: 20px;
+    padding-top: 20px;
 }
-
-.loginBtn#login
-{
-	font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
-	display: inline-block;
-	color: #FFFFFF;
-	background-color: #0099FF;
-	font-weight: bold;
-	font-size: 1em;
-	text-align: center;
-	text-decoration: none;
-	border: 1px solid #296A7B;
-	border-radius: 5px;
-	white-space: nowrap;
-	vertical-align: middle;
-	padding:0.8em;
-	
+.loginBtn#login {
+    font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+    display: inline-block;
+    color: #FFFFFF;
+    background-color: #0099FF;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #296A7B;
+    border-radius: 5px;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.8em;
 }
-.loginBtn#login:hover
-{
-	color: #0099FF;
-	background-color: #FFFFFF;
+.loginBtn#login:hover {
+    color: #0099FF;
+    background-color: #FFFFFF;
 }
-a:hover
-{
-text-decoration: none;
+a:hover {
+    text-decoration: none;
 }
-a.red{
-	color: #c9302c;
+a.red {
+    color: #c9302c;
 }
-a.lightgreen{
-	color: #449d44;
+a.lightgreen {
+    color: #449d44;
 }
-a.lightblue{
-	color: #31b0d5;
+a.lightblue {
+    color: #31b0d5;
 }
-a.green{
-	color: #00FF00;
+a.green {
+    color: #00FF00;
 }
-a.orange{
-	color: #ec971f;
+a.orange {
+    color: #ec971f;
 }
 .footer {
-      padding-top: 1em;
-        padding-bottom: 1em;
-          margin-top: 40px;
-            border-top: 1px solid #296A7B;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-top: 40px;
+    border-top: 1px solid #296A7B;
 }
-
-
 @media (max-width: 1000px) {
     .navbar-header {
-        float: none;
+	float: none;
     }
     .navbar-toggle {
-        display: block;
+	display: block;
     }
     .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+	border-top: 1px solid transparent;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
     .navbar-collapse.collapse {
-        display: none!important;
+	display: none!important;
     }
     .navbar-nav {
-        float: none!important;
-        margin: 7.5px -15px;
+	float: none!important;
+	margin: 7.5px -15px;
     }
     .navbar-nav>li {
-        float: none;
+	float: none;
     }
     .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
     }
     .navbar-text {
-        float: none;
-        margin: 15px 0;
+	float: none;
+	margin: 15px 0;
     }
     /* since 3.1.0 */
-    .navbar-collapse.collapse.in { 
-        display: block!important;
+    
+    .navbar-collapse.collapse.in {
+	display: block!important;
     }
     .collapsing {
-        overflow: hidden!important;
+	overflow: hidden!important;
     }
 }
-.hidden{
-	display: none;
-}	
-#filedrag
-{
-	display: none;
-	font-weight: bold;
-	text-align: center;
-	padding: 1em 0;
-	margin: 1em 0;
-	color: #555;
-	border: 2px dashed #555;
-	border-radius: 7px;
-	cursor: default;
+.hidden {
+    display: none;
 }
-#filedrag:hover{
-cursor: pointer;
+#filedrag {
+    display: none;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em 0;
+    margin: 1em 0;
+    color: #555;
+    border: 2px dashed #555;
+    border-radius: 7px;
+    cursor: default;
 }
-#filedrag.hover
-{
-	color: #f00;
-	border-color: #f00;
-	border-style: solid;
-	box-shadow: inset 0 3px 4px #888;
+#filedrag:hover {
+    cursor: pointer;
 }
-.alert#alertBox{
-	margin: .5em;
-	
+#filedrag.hover {
+    color: #0099FF;
+    border-color: #0099FF;
+    border-style: solid;
+    box-shadow: inset 0 3px 4px #888;
+}
+.alert#alertBox {
+    margin: .5em;
 }

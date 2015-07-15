@@ -2,18 +2,25 @@ var isLoggingIn = false;
 // Start of upload script
 var temp_counter = 0;
 
-var ALERT_INFO = 2;
-var ALERT_SUCCESS = 1;
-var ALERT_DANGER = 0;
+// Section for alert message box
+// Provides functions to show/hide and change text of alert message box
+//
+// Global Variables 
+var ALERT_INFO = 2;		// Colour = blue
+var ALERT_SUCCESS = 1;		// Colour = green
+var ALERT_DANGER = 0;		// Colour = red
 
+// Closes alert box
 function closeAlert()
 {
 	$("#alertBox").addClass("hidden");
 }
+// Shows alertbox
 function openAlert()
 {
 	$("#alertBox").removeClass("hidden");
 }
+// Change the text message of alert box and its colour according to type
 function changeAlertMSG(str, isInfo)
 {
 	// Removing classes which might interfere with the new class
@@ -34,11 +41,15 @@ function changeAlertMSG(str, isInfo)
 			$("#alertBox").addClass("alert-info");
 		default:
 			// shouldnt go here..
+			// box will be transparent if this occurs
 		break;
 	}
 	
 	document.getElementById("loginMSG").innerHTML = str;
 }
+
+// Developmental function to trace time taken
+// for send command to return its ajax object
 function devFunc_temp()
 {
 	temp_counter++;
@@ -54,10 +65,13 @@ var printer = "";
 function checkPrinterSelection()
 {
 	printer = window.location.hash.substring(1);
-	if(printer == undefined)
+	
+	// Check if string value is empty
+	if(typeof printer === "undefined")
 	{
-		return;
+		return false;
 	}
+	
 	switch (printer)
 	{
 		case "psts":
@@ -77,8 +91,16 @@ function checkPrinterSelection()
 // Function to check if a file is selected
 // Returns true is file is selected
 var GLOBAL_File;
-function checkFileSelection(){
-	return true;
+function checkFileSelection()
+{
+	// Check if GLOBAL_File is set up
+	if(typeof GLOBAL_File === "undefined")
+		return false;
+	
+	// If there is a name for it, then there is a file.
+	// Checking for PDF is done when setting GLOBAL_File
+	if(GLOBAL_File.name == "")
+		return true;
 }
 
 
@@ -201,33 +223,55 @@ $(document).ready(function()
 	}
 });
 
-// file drag hover
-function FileDragHover(e) {
+// File drag hover
+function FileDragHover(e) 
+{
 	e.stopPropagation();
 	e.preventDefault();
-	//e.target.className = (e.type == "dragover" ? "hover" : "");
+	
+	// Dont change class if target isnt filedrag
+	if(e.target.id == "filedrag")
+	{		
+		e.target.className = (e.type == "dragover" ? "hover" : "");
+	}
 }
-// file selection
+//  File selection
 function FileSelectHandler(e) {
 
-	// cancel event and hover styling
+	// Cancel event and hover styling	
 	FileDragHover(e);
 
 	// fetch FileList object
 	var files = e.target.files || e.dataTransfer.files;
 
 	// process all File objects
+	/*
 	for (var i = 0, f; f = files[i]; i++) {
 		ParseFile(f);
-	}
+	}*/
+	
+	// Single file only
+	ParseFile(files[0]);
 	
 }
 function ParseFile(file) 
 {
-	GLOBAL_File = file;
-	document.getElementById("filedrag").innerHTML = file.name;
-	//document.getElementById("file").value = file.name;
+	// Only change GLOBAL_File if type if PDF
+	if(file.type === "application/pdf")
+	{
+		GLOBAL_File = file;
+		
+		// Update the text in filedrag 
+		document.getElementById("filedrag").innerHTML = file.name;
+	}
+	// If pdf not received, display alert box reminding user
+	else
+	{
+		openAlert();
+		changeAlertMSG("I can only receive pdf files! >.<", ALERT_INFO);
+	}
 }
+
 function uploadToSunfire(fileName)
 {
 	var oOutput = document.getElementById("uploadSunfire");
@@ -503,5 +547,3 @@ function checkLogin()
 		location.assign("http://" + window.location.hostname);
 	}
 }
-
-

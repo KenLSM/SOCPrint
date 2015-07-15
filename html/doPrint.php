@@ -24,24 +24,7 @@
 	else
 	{
 		// Command for execution in sunfire: pdftops [input file] [output file]
-		//$message  = $ssh->exec("lpr -P psts SP_PS_$fileName.ps");
-		
-		// Throw away
-		/*
-		$ssh->read("PS-printer paper usage:");
-		echo "Paper usage: " . $ssh->read("pages") . "<br>";
-		
-		$ssh->read("Available quota:");
-		echo "Available quota: " . $ssh->read("pages") . "<br>";
-		
-		$ssh->read("Quota topup:");
-		echo "Quota topup: " . $ssh->read("pages") . "<br>";
-		
-		$ssh->read("Allow to overdraft:");
-		echo "Allow to overdraft: ". $ssh->read("pages") . "<br>";
-		
-		$ssh->read("~eprint/forms");
-		*/
+		$message  = $ssh->exec("lpr -P psts SP_PS_$fileName.ps");
 	}
 	
 	$array = array("status" => $message);

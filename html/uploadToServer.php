@@ -1,5 +1,3 @@
-
-
 <?php
 	/*
 	PHP Page used for uploading file to sunfire
