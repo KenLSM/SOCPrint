@@ -1,5 +1,4 @@
-<html>
-<head>
+<html><head>
 
 	<script src="/Scripts/jquery-2.1.4.min.js"></script>
 	
@@ -31,13 +30,10 @@
 <body onload="checkServer()">
 
 
-
-
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header" >
+    <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -50,22 +46,15 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav loginBox">
 	<h6>
-		<p id="serverStatus">	
-			Server status: Checking
-		</p>
+		<p id="serverStatus">
+Server status: Checking</p>
 	</h6> <span class="sr-only">
-       </ul>
-       <ul class="nav navbar-nav navbar-right" id="loginBox">
+       </span></ul>
+       <ul class="nav navbar-nav navbar-right loginBox">
 		<table>
-			<tr id="loginStatus">
-				<td>
-				<h6>
-					<div id="loginMSG"><br>	</div>
-				</h6>
-				</td>
-			</tr>
+			<tbody>
 			<tr>
 				<td>
 					<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tanbc"><br>
@@ -77,63 +66,27 @@
 					<a onclick="checkLogin()" class="loginBtn" type="button" id="login">Login</a>
 				</td>
 			</tr>
-		</table>
+		</tbody></table>
 	</ul>
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<header>
-<!--
-<table id="header">
-<tbody>
-	<tr>
-		<td>
-			<img src="img/logo_big.png" alt="SOCPrint!" style="width:24em;height:6em; float:left">
-		</td>
-		
-		<td id="loginBox">
-			<table>
-				<tr id="loginStatus">
-					<td>
-					<h6>
-						<div id="loginMSG"><br>	</div>
-					</h6>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input id="username" class="textbox" type="text" name="name" placeholder="Sunfire ID e.g. a0123456 or tanbc"><br>
-						<input id="password" class="textbox" type="password" name="password" placeholder="Password"><br>
-			
-					</td>
 
-					<td>
-						<a onclick="checkLogin()" class="loginBtn" type="button" id="login">Login</a>
-					</td>
-				</tr>
-			</table>
-		</td>
-		<td>
-			<h2>
-			<p id="serverStatus">	
-				Server status: Checking
-			</p>
-			</h2>
-		</td>
-		</div>
-	</tr>
-</tbody>
--->
-</table>
-</header>
+<div class="container">
 
-<div class="container" >
-<!-- background header to create space for the div below, else the text would get behind the fixed header -->
 
 <div class="row">
-
+<div class="col-lg-4 divcenter col-md-offset-4">
+	<div class="alert alert-dismissible alert-danger hidden" id="alertBox" role="alert">
+	<button type="button" class="close" onclick="closeAlert()"><span aria-hidden="true">×</span>
+	</button>
+		<p id="loginMSG"></p>
+	</div>
+</div>
 <div class="col-lg-12">
+	
+
 	<div class="col-lg-6">
 		<div id="printerStatus">
 			 Dev text:<a class="lightgreen" id="tempCounter"></a>
@@ -141,37 +94,46 @@
 		<div>
 		<h5>
 			<div class="progress" id="paperUsageBar">
-				<div class="progress-bar progress-bar-success progress-bar-striped" id ="paperUsageBarSuc" role="progressbar"style="width: 0%">
+				<div class="progress-bar progress-bar-success progress-bar-striped" id="paperUsageBarSuc" role="progressbar" style="width:0%">
 				Available
 				</div>
-				<div class="progress-bar progress-bar-warning progress-bar-striped" id = "paperUsageBarWar" role="progressbar"style="width: 0%">
+				<div class="progress-bar progress-bar-warning progress-bar-striped" id="paperUsageBarWar" role="progressbar" style="width:0%">
 				Overdraft
 				</div>
-				<div class="progress-bar progress-bar-danger progress-bar-striped" id = "paperUsageBarDan" role="progressbar"style="width: 0%">
+				<div class="progress-bar progress-bar-danger progress-bar-striped" id="paperUsageBarDan" role="progressbar" style="width:0%">
 				Usage
 				</div>				
-				<div class="progress-bar progress-bar-info progress-bar-striped active" id = "paperUsageBarInfo" role="progressbar"style="width: 100%">
+				<div class="progress-bar progress-bar-info progress-bar-striped active" id="paperUsageBarInfo" role="progressbar" style="width: 100%;">
 				Printer status and quota will be populated after login.
 				</div>
 			</div>
-			Total available quota: <a class="lightgreen" id="availQuota"  data-toggle="tooltip" title="You can print this amount">0</a> pages
+			Total available quota: <a class="lightgreen" id="availQuota" data-toggle="tooltip" title="" data-original-title="You can print this amount"> 0 </a> pages
 			<br>
-			Overdraft: <a class="orange" id ="overdraft" data-toggle="tooltip" title="You can exceed paper usage by this amount">0</a> pages
+			Overdraft: <a class="orange" id="overdraft" data-toggle="tooltip" title="" data-original-title="You can exceed paper usage by this amount"> 0 </a> pages
 			<br>
-			Paper usage: <a class="red" id = "paperUsage" data-toggle="tooltip" title="You consumed this amount">0</a> pages
+			Paper usage: <a class="red" id="paperUsage" data-toggle="tooltip" title="" data-original-title="You consumed this amount"> 0 </a> pages
 		</h5>			
 		</div>
 	</div>
 	<div class="col-lg-6">
 	<h5>
+		<div id="filedrag" style="display: block;">Drop or click to add pdf file here! </div>
+		<input id="fileSelect" type="file" name="file" class="hidden" accept="application/pdf">
 		<form method="post" name="uploadFile" onsubmit="return false">
-			<input id="file" type="file" name="file" required><br>
-			<input type="submit" value="Print it!">
+			<!--<input id="file" type="file" name="file"  accept="application/pdf"><br>
+			-->
+			<input id="submitButton" type="submit" value="Print it!">
 			<div>Notice: this application prints your pdf documents and consumes your available quotas. Upload message <br>File restriction of < 2mb and pdf files only</div>
-			<div id="uploadServer"></div>
-			<div id="uploadSunfire"></div>
-			<div id="uploadConvertPS"></div>
-			<div id="uploadPrint"></div>
+			Upload to server: <a id="uploadServer"></a>
+			<br>
+			Upload to sunfire: <a id="uploadSunfire"></a>
+			<br>
+			Conversion: <a id="uploadConvertPS"></a>
+			<br>
+			Send to printer: <a id="uploadPrint"></a>
+			
+
+			
 		</form>
 	</h5>
 	</div>
@@ -179,33 +141,36 @@
 </div>
 <div class="col-lg-12 divcenter noselect">
 	<h2>Printer Selection</h2>
-	<div class="col-lg-4 divcenter" style="border:1px solid silver">
-	<a href ="#psts">
-	<h2 id="psts" class = "printerSelected">
+	<div class="col-lg-4 divcenter">
+	<a href="#psts">
+	<h2 id="psts" class="printerSelected">
 		Psts - Level 1
 		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:10em;">
-		<p id = "ppsts"> things </p>
+		<p id="ppsts">no entries
+</p>
 	</h2>	
 	</a>
 	</div>
-	<div class="col-lg-4  divcenter" style="border:1px solid silver">
+	<div class="col-lg-4  divcenter">
 
-	<a href ="#pstsb">
-	<h2 id="pstsb" class = "printerSelected">
+	<a href="#pstsb">
+	<h2 id="pstsb" class="printerSelected">
 		Pstsb - Level 1
 		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:10em;">
-		<p id = "ppstsb"> things </p>
+		<p id="ppstsb">no entries
+</p>
 	</h2>	
 	</a>
 	
 	</div>
-	<div class="col-lg-4  divcenter" style="border:1px solid silver">
+	<div class="col-lg-4  divcenter">
 
-	<a href ="#pstsc">
-	<h2 id="pstsc" class = "printerSelected">
+	<a href="#pstsc">
+	<h2 id="pstsc" class="printerSelected">
 		Pstsc - Level 1
 		<img src="img/printerIcon.png" alt="SOCPrint!" style="width:10em;">	
-		<p id = "ppstsc"> things </p>
+		<p id="ppstsc">no entries
+</p>
 	</h2>	
 	</a>
 	</div>
@@ -214,9 +179,11 @@
 
 
 </div>
+
+  
 <footer class="footer">
-<h5>Thanks for using SOCPrint! &copy; 2015 | <a href="#">About</a></h5>
+<h5>Thanks for using SOCPrint! © 2015 | <a href="#">About Us</a></h5>
 </footer>
 </div>
-</body>
-</html>
+
+</body></html>

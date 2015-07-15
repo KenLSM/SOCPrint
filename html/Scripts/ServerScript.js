@@ -2,11 +2,48 @@ var isLoggingIn = false;
 // Start of upload script
 var temp_counter = 0;
 
-function temp()
+var ALERT_INFO = 2;
+var ALERT_SUCCESS = 1;
+var ALERT_DANGER = 0;
+
+function closeAlert()
+{
+	$("#alertBox").addClass("hidden");
+}
+function openAlert()
+{
+	$("#alertBox").removeClass("hidden");
+}
+function changeAlertMSG(str, isInfo)
+{
+	// Removing classes which might interfere with the new class
+	$("#alertBox").removeClass("hidden");
+	$("#alertBox").removeClass("alert-danger");
+	$("#alertBox").removeClass("alert-success");
+	$("#alertBox").removeClass("alert-info");
+
+	switch(isInfo)
+	{
+		case ALERT_DANGER:
+			$("#alertBox").addClass("alert-danger");
+		break;
+		case ALERT_SUCCESS:
+			$("#alertBox").addClass("alert-success");
+		break;
+		case ALERT_INFO:
+			$("#alertBox").addClass("alert-info");
+		default:
+			// shouldnt go here..
+		break;
+	}
+	
+	document.getElementById("loginMSG").innerHTML = str;
+}
+function devFunc_temp()
 {
 	temp_counter++;
-	document.getElementById("tempCounter").innerHTML = temp_counter + "s since last refresh";
-	setTimeout(temp, 1000);
+	document.getElementById("tempCounter").innerHTML = temp_counter + "s since last refresh. Waiting for reply";
+	setTimeout(devFunc_temp, 1000);
 }
 
 // Function to check if printer is selected or not
@@ -14,12 +51,14 @@ function temp()
 // Return true on printer selected
 // Return false if printer cannot be found
 var printer = "";
-
 function checkPrinterSelection()
 {
 	printer = window.location.hash.substring(1);
-
-	switch (text)
+	if(printer == undefined)
+	{
+		return;
+	}
+	switch (printer)
 	{
 		case "psts":
 			return true;
@@ -34,6 +73,16 @@ function checkPrinterSelection()
 			return false;
 	}
 }
+
+// Function to check if a file is selected
+// Returns true is file is selected
+var GLOBAL_File;
+function checkFileSelection(){
+	return false;
+}
+
+
+// Initial call to set up listeners etc
 $(document).ready(function()
 {
 
@@ -47,14 +96,19 @@ $(document).ready(function()
 		// If user is  not logged in dont
 		if (isLoggedIn == "Login")
 		{
-			loginMSG.style.color = "red";
-			loginMSG.innerHTML = "Please login first";
+			openAlert();
+			changeAlertMSG("Please login first!", ALERT_DANGER);
 		}
 		// Check if printer is selected or not
-		else if (checkPrinterSelection() == false)
+		else if (checkPrinterSelection() === false)
 		{
-			loginMSG.style.color = "red";
-			loginMSG.innerHTML = "Please select a printer";
+			openAlert();
+			changeAlertMSG("Which printer you wanna print from?", ALERT_DANGER);
+		}
+		else if (checkFileSelection() === false)
+		{
+			openAlert();
+			changeAlertMSG("You have to give me a file to print! >:(", ALERT_DANGER);
 		}
 		else
 		{
@@ -66,6 +120,7 @@ $(document).ready(function()
 
 			formData.append("username", document.getElementById("username").value);
 			formData.append("password", document.getElementById("password").value);
+			formData.append("file", GLOBAL_File, GLOBAL_File.name);
 			$.ajax(
 			{
 				type: 'post',
@@ -93,7 +148,9 @@ $(document).ready(function()
 		ev.preventDefault();
 	}, false);
 
-	// Login input field script. To allow pressing enter to fire login event
+	
+	// Login input field script. 
+	// To allow pressing enter to fire login event
 	$("#username").keyup(function(event)
 	{
 		if (event.keyCode == 13)
@@ -108,14 +165,69 @@ $(document).ready(function()
 			$("#login").click();
 		}
 	});
-	// end login input field script
+	// End login input field script
 
-	// to enable tooltip
+	
+	
+	// To enable tooltip
+	// Required by bootstrap
 	$('[data-toggle="tooltip"]').tooltip();
-	// end
+	// End
+	
+	// Event scripts for file drag/drop
+	if (window.File && window.FileList && window.FileReader)
+	{
+		var fileselect;
+		var filedrag;
+		
+		fileselect = document.getElementById("fileSelect"),
+		filedrag = document.getElementById("filedrag"),
+		submitbutton = document.getElementById("submitButton");
 
+		
+		// File select
+		// to detect if the user uses click to add file
+		filedrag.addEventListener("click", function(){
+			fileselect.click();
+			}, false);
+		fileselect.addEventListener("change", FileSelectHandler, false);
+
+		// file drop
+		filedrag.addEventListener("dragover", FileDragHover, false);
+		filedrag.addEventListener("dragleave", FileDragHover, false);
+		filedrag.addEventListener("drop", FileSelectHandler, false);
+		filedrag.style.display = "block";
+
+	}
 });
 
+// file drag hover
+function FileDragHover(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	//e.target.className = (e.type == "dragover" ? "hover" : "");
+}
+// file selection
+function FileSelectHandler(e) {
+
+	// cancel event and hover styling
+	FileDragHover(e);
+
+	// fetch FileList object
+	var files = e.target.files || e.dataTransfer.files;
+
+	// process all File objects
+	for (var i = 0, f; f = files[i]; i++) {
+		ParseFile(f);
+	}
+	
+}
+function ParseFile(file) 
+{
+	GLOBAL_File = file;
+	document.getElementById("filedrag").innerHTML = file.name;
+	//document.getElementById("file").value = file.name;
+}
 function uploadToSunfire(fileName)
 {
 	var oOutput = document.getElementById("uploadSunfire");
@@ -304,14 +416,14 @@ function checkLogin()
 	{
 		if (document.getElementById("username").value == "")
 		{
-			loginMSG.style.color = "red";
-			loginMSG.innerHTML = "Please enter your username";
+			openAlert();
+			changeAlertMSG("Please enter your <b>username</b>!", ALERT_DANGER);
 			return;
 		}
 		if (document.getElementById("password").value == "")
 		{
-			loginMSG.style.color = "red";
-			loginMSG.innerHTML = "Please enter your password";
+			openAlert();
+			changeAlertMSG("Please enter your <b>password</b>!", ALERT_DANGER);
 			return;
 		}
 		// Ajax to login php
@@ -331,21 +443,24 @@ function checkLogin()
 				{
 					case "NO_CONNECTION":
 						{
-							loginMSG.style.color = "red";
-							loginMSG.innerHTML = "Unable to connect to sunfire";
+							openAlert();
+							changeAlertMSG("Unable to connect to sunfire!! :O", ALERT_DANGER);
 							break;
 						}
 					case "WRONG":
 						{
-							loginMSG.style.color = "red";
-							loginMSG.innerHTML = "Incorrect username or password";
+							openAlert();
+							changeAlertMSG("Incorrect <b>username</b> or <b>password</b> :'(", ALERT_DANGER);
 							break;
 						}
 					case "OK":
 						{
+							openAlert();
+							changeAlertMSG("Logged in successfully! ^_^", ALERT_SUCCESS);
+													
 							document.getElementById("login").innerHTML = "Disconnect";
-							loginMSG.style.color = "lime";
-							loginMSG.innerHTML = "Logged in successfully";
+							//loginMSG.style.color = "lime";
+							//loginMSG.innerHTML = "Logged in successfully";
 							//document.getElementById("username").disabled = true;
 							//document.getElementById("password").disabled = true;
 							//To make the log in field to disappear
@@ -353,13 +468,13 @@ function checkLogin()
 							document.getElementById("password").style.display = "none";
 
 							setTimeout(sendCommand, 5000);
-							temp();
+							devFunc_temp();
 							break;
 						}
 					default:
 						{
-							loginMSG.style.color = "red";
-							loginMSG.innerHTML = "Unknown: " + data;
+							openAlert();
+							changeAlertMSG("Unknown error! Please contact the dev with this data <b>" + data + "</b> >.<" , ALERT_DANGER);
 							break;
 						}
 				}
@@ -368,8 +483,8 @@ function checkLogin()
 			}
 		})
 		isLoggingIn = true;
-		loginMSG.style.color = "orange";
-		loginMSG.innerHTML = "Logging In Now";
+		openAlert();
+		changeAlertMSG("Logging In <b>Now!</b>" , ALERT_INFO);
 	}
 	else
 	{
@@ -377,14 +492,16 @@ function checkLogin()
 		document.getElementById("username").value = "";
 		document.getElementById("password").value = "";
 
-		loginMSG.style.color = "lime";
-		loginMSG.innerHTML = "Disconnected successfully";
+		//loginMSG.style.color = "lime";
+		//loginMSG.innerHTML = "Disconnected successfully";
 		//document.getElementById("username").disabled = false;
 		//document.getElementById("password").disabled = false;
 
 		//To make the log in field to appear
 		document.getElementById("username").style.display = "initial";
 		document.getElementById("password").style.display = "initial";
-		location.reload();
+		location.assign("http://" + window.location.hostname);
 	}
 }
+
+
