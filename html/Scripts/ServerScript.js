@@ -78,7 +78,7 @@ function checkPrinterSelection()
 // Returns true is file is selected
 var GLOBAL_File;
 function checkFileSelection(){
-	return false;
+	return true;
 }
 
 
