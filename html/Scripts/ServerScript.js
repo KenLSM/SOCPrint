@@ -202,7 +202,7 @@ function doPrint(fileName)
 
 			if (obj.status == "")
 			{
-				oOutput.innerHTML = "Print: Successful. Collect it at " + printer ";
+				oOutput.innerHTML = "Print: Successful. Collect it at " + printer;
 			}
 			else
 			{
