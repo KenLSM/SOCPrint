@@ -10,7 +10,7 @@ p {
 }
 .uploadMessageBox{
     height: 4em;  
-    border: 1px solid #296A7B;
+    border: 1px solid #cccccc;
     border-radius: 5px;
     background-color: #5bc0de;
     white-space: nowrap;
@@ -22,6 +22,12 @@ p {
     -o-transition: border linear .2s, box-shadow linear .2s;
     transition: border linear .2s, box-shadow linear .2s;
     transition: background-color 0.4s;
+}
+.progress-bar{
+	font-size:1em;
+}
+.tooltip{
+	font-size:1em;
 }
 .uploadMessageBox > h5{
     color: #FFFFFF;
