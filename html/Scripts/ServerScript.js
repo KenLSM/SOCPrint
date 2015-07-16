@@ -131,9 +131,10 @@ function changeUpload(state){
 // for send command to return its ajax object
 function devFunc_temp()
 {
-	temp_counter++;
+	
 	document.getElementById("tempCounter").innerHTML = temp_counter + "s since last refresh. Waiting for reply";
 	setTimeout(devFunc_temp, 1000);
+	temp_counter++;
 }
 
 // Function to check if printer is selected or not
@@ -596,7 +597,7 @@ function checkLogin()
 					case "OK":
 						{
 							openAlert();
-							changeAlertMSG("Logged in successfully! ^_^", ALERT_SUCCESS);
+							changeAlertMSG("Welcome " + document.getElementById("username").value + ",  ^_^", ALERT_SUCCESS);
 													
 							document.getElementById("login").innerHTML = "Disconnect";
 							//loginMSG.style.color = "lime";
