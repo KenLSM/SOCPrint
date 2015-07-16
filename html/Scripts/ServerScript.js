@@ -1,5 +1,4 @@
 var isLoggingIn = false;
-// Start of upload script
 var temp_counter = 0;
 
 // Section for alert message box
@@ -47,6 +46,86 @@ function changeAlertMSG(str, isInfo)
 	
 	document.getElementById("loginMSG").innerHTML = str;
 }
+function changeVerboseMSG(str)
+{
+	if(document.getElementById("isVerbose").checked === true)
+	{
+		$("#verboseBox").removeClass("hidden");	
+		document.getElementById("verboseMSG").innerHTML = str;
+	}
+}
+// Section for changing colour of uploadBox
+// Provides colour changing functions
+// Global variables
+var UPLOADBOX_READY = 0;
+var UPLOADBOX_SERVER = 1;
+var UPLOADBOX_SERVER_ERROR = 11;
+var UPLOADBOX_SUNFIRE = 2;
+var UPLOADBOX_SUNFIRE_ERROR = 22;
+var UPLOADBOX_PSCONVERT = 3;
+var UPLOADBOX_PSCONVERT_ERROR = 33;
+var UPLOADBOX_PRINTER = 4;
+var UPLOADBOX_PRINTER_ERROR = 44;
+
+// Helper function to remove all related class
+function CH_UP_removeClass(selector){
+	selector.removeClass("uploadDone uploadSelect uploadError");
+	return selector;
+}
+function changeUpload(state){
+	
+	switch(state)
+	{
+		case UPLOADBOX_READY:
+			// Set all box to green and server box to yellow
+			CH_UP_removeClass($("#uploadBoxServer"));
+			CH_UP_removeClass($("#uploadBoxSunfire"));
+			CH_UP_removeClass($("#uploadBoxPS"));
+			CH_UP_removeClass($("#uploadBoxPrint"));
+			
+			$("#uploadBoxServer").addClass("uploadSelect");
+		break;
+		case UPLOADBOX_SERVER:
+			// Set server box to green and sunfire box to yellow
+			$("#uploadBoxServer").removeClass("uploadSelect").addClass("uploadDone");
+			$("#uploadBoxSunfire").addClass("uploadSelect");
+		break;
+		case UPLOADBOX_SERVER_ERROR:
+			// Set server box to red
+			$("#uploadBoxServer").removeClass("uploadSelect").addClass("uploadError");
+		break;
+		case UPLOADBOX_SUNFIRE:
+			// Set server box to green and sunfire box to yellow
+			$("#uploadBoxSunfire").removeClass("uploadSelect").addClass("uploadDone");
+			$("#uploadBoxPS").addClass("uploadSelect");
+		break;
+		case UPLOADBOX_SUNFIRE_ERROR:
+			// Set sunfire box to red 
+			$("#uploadBoxSunfire").removeClass("uploadSelect").addClass("uploadError");
+		break;
+		case UPLOADBOX_PSCONVERT:
+			// Set sunfire box to green and printer box to yellow
+			$("#uploadBoxPS").removeClass("uploadSelect").addClass("uploadDone");
+			$("#uploadBoxPrint").addClass("uploadSelect");
+		break;
+		case UPLOADBOX_PSCONVERT_ERROR:
+			// Set PS box to red 
+			$("#uploadBoxPS").removeClass("uploadSelect").addClass("uploadError");
+		break;
+		case UPLOADBOX_PRINTER:
+			// Set server printer to green 
+			$("#uploadBoxPrint").removeClass("uploadSelect").addClass("uploadDone");
+		break;
+		case UPLOADBOX_PRINTER_ERROR:
+			// Set server printer to red 
+			$("#uploadBoxPrint").removeClass("uploadSelect").addClass("uploadError");
+		break;
+		default:
+			// shouldnt go here..
+		break;
+	}
+}
+
 
 // Developmental function to trace time taken
 // for send command to return its ajax object
@@ -125,7 +204,7 @@ $(document).ready(function()
 		else if (checkPrinterSelection() === false)
 		{
 			openAlert();
-			changeAlertMSG("Which printer you wanna print from?", ALERT_DANGER);
+			changeAlertMSG("Which <b>printer</b> you wanna print from?", ALERT_DANGER);
 		}
 		else if (checkFileSelection() === false)
 		{
@@ -134,12 +213,13 @@ $(document).ready(function()
 		}
 		else
 		{
-			loginMSG.style.color = "green";
-			loginMSG.innerHTML = "Uploading started";
-
+			changeUpload(UPLOADBOX_READY);
+			changeAlertMSG("Uploading <b>started!</b>", ALERT_INFO);
+			
 			var oOutput = document.getElementById("uploadServer");
 			var formData = new FormData(document.forms.namedItem("uploadFile"));
 
+			oOutput.innerHTML = "Calculating transfer vectors..."
 			formData.append("username", document.getElementById("username").value);
 			formData.append("password", document.getElementById("password").value);
 			formData.append("file", GLOBAL_File, GLOBAL_File.name);
@@ -155,11 +235,14 @@ $(document).ready(function()
 					switch (obj.status)
 					{
 						case "OK":
-							oOutput.innerHTML = "Upload: You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType;
+							oOutput.innerHTML = "Done!";
+							changeVerboseMSG("You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType);
+							changeUpload(UPLOADBOX_SERVER);
 							uploadToSunfire(obj.fileName);
 							break;
 						default:
-							oOutput.innerHTML = "Upload: Unsuccessful: " + obj.status;
+							oOutput.innerHTML = "Unsuccessful";
+							changeAlertMSG("Failed to upload properly. Please contact the dev with this data <b>" + obj.status + "</b>", ALERT_DANGER);
 							break;
 					}
 				},
@@ -275,7 +358,7 @@ function ParseFile(file)
 function uploadToSunfire(fileName)
 {
 	var oOutput = document.getElementById("uploadSunfire");
-	oOutput.innerHTML = "Uploading to sunfire now...";
+	oOutput.innerHTML = "Sending with pigeons...";
 	var formData = new FormData();
 	formData.append("username", document.getElementById("username").value);
 	formData.append("password", document.getElementById("password").value);
@@ -292,11 +375,15 @@ function uploadToSunfire(fileName)
 			switch (obj.status)
 			{
 				case "OK":
-					oOutput.innerHTML = "Upload Sunfire: Sucessful" + obj.verbose;
+					oOutput.innerHTML = "Done!";
+					changeVerboseMSG(obj.verbose);
+					changeUpload(UPLOADBOX_SUNFIRE);
 					convertToPS(fileName);
 					break;
 				default:
-					oOutput.innerHTML = "Upload Sunfire: Unsuccessful: " + obj.status;
+					oOutput.innerHTML = "Unsuccessful";
+					changeAlertMSG("Failed to upload to sunfire. Please contact dev with this data <b>" + obj.status + "</b>", ALERT_DANGER);
+					changeUpload(UPLOADBOX_SUNFIRE_ERROR);
 					break;
 			}
 		},
@@ -308,7 +395,7 @@ function uploadToSunfire(fileName)
 function convertToPS(fileName)
 {
 	var oOutput = document.getElementById("uploadConvertPS");
-	oOutput.innerHTML = "Converting to PS...";
+	oOutput.innerHTML = "Casting conversion. It will take awhile";
 	var formData = new FormData();
 	formData.append("username", document.getElementById("username").value);
 	formData.append("password", document.getElementById("password").value);
@@ -325,11 +412,15 @@ function convertToPS(fileName)
 			switch (obj.status)
 			{
 				case "OK":
-					oOutput.innerHTML = "PDFToPS: Successful " + obj.verbose;
-					doPrint(fileName);
+					oOutput.innerHTML = "Done!";
+					changeVerboseMSG(obj.verbose);
+					changeUpload(UPLOADBOX_PSCONVERT);
+					doPrint(fileName);					
 					break;
 				default:
-					oOutput.innerHTML = "PDFToPS: Unsuccessful: " + obj.status + obj.error + obj.verbose;
+					oOutput.innerHTML = "Unsuccessful";
+					changeAlertMSG("Failed to upload to sunfire. Please contact dev with this data <b>" + obj.status + obj.error + obj.verbose + "</b>", ALERT_DANGER);
+					changeUpload(UPLOADBOX_PSCONVERT_ERROR);
 					break;
 			}
 		},
@@ -341,7 +432,7 @@ function convertToPS(fileName)
 function doPrint(fileName)
 {
 	var oOutput = document.getElementById("uploadPrint");
-	oOutput.innerHTML = "Sending print job";
+	oOutput.innerHTML = "Bringing to SoC";
 	var formData = new FormData();
 	formData.append("username", document.getElementById("username").value);
 	formData.append("password", document.getElementById("password").value);
@@ -358,11 +449,16 @@ function doPrint(fileName)
 
 			if (obj.status == "")
 			{
-				oOutput.innerHTML = "Print: Successful. Collect it at " + printer;
+				oOutput.innerHTML = "Done!";
+				changeVerboseMSG("Sent to printer " + printer);
+				changeAlertMSG("Collect your printout at " + printer, ALERT_SUCCESS);
+				changeUpload(UPLOADBOX_PRINTER);
 			}
 			else
 			{
-				oOutput.innerHTML = "Print: Unsuccessful: " + obj.status;
+				oOutput.innerHTML = "Unsuccessful";
+				changeAlertMSG("Failed to upload to sunfire. Please contact dev with this data <b>" + obj.status + "</b>", ALERT_DANGER);
+				changeUpload(UPLOADBOX_PRINTER_ERROR);
 			}
 		},
 		contentType: false,

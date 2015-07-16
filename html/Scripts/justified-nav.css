@@ -8,6 +8,39 @@ p {
 .divcenter {
     text-align: center;
 }
+.uploadMessageBox{
+    height: 4em;  
+    border: 1px solid #296A7B;
+    border-radius: 5px;
+    background-color: #5bc0de;
+    white-space: nowrap;
+}
+.uploadAnimation
+{
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    transition: background-color 0.4s;
+}
+.uploadMessageBox > h5{
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1em;
+    vertical-align: middle;
+    margin-left: 1em;
+}
+.uploadDone{
+    background-color: #5cb85c ;
+}
+.uploadSelect{
+    background-color: #f0ad4e  ;
+    box-shadow: inset 3px 4px #888;
+}
+.uploadError{
+    background-color: #d9534f ;
+    box-shadow: inset 3px 4px #888;
+}
 header {
     width: 100%;
     aheight: 9em;
@@ -80,9 +113,13 @@ p#serverStatus {
     margin-top: 1.1em;
     padding: 0em;
 }
-.alert#alertBox {
+.alert {
     background-image: none;
     border-color: transparent;
+    padding: .5em;
+}
+button.close.closeright{
+	right: 0px;
 }
 input.textbox {
     width: 25em;
@@ -215,7 +252,4 @@ a.orange {
     border-color: #0099FF;
     border-style: solid;
     box-shadow: inset 0 3px 4px #888;
-}
-.alert#alertBox {
-    margin: .5em;
 }

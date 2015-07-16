@@ -79,21 +79,18 @@ Server status: Checking</p>
 <div class="row">
 <div class="col-lg-4 divcenter col-md-offset-4">
 	<div class="alert alert-dismissible alert-danger hidden" id="alertBox" role="alert">
-	<button type="button" class="close" onclick="closeAlert()"><span aria-hidden="true">×</span>
+	<button type="button" class="close closeright" onclick="closeAlert()"><span aria-hidden="true">×</span>
 	</button>
 		<p id="loginMSG"></p>
 	</div>
 </div>
+<div class="col-lg-4 divcenter col-md-offset-4">
+	<div class="alert alert-dismissible alert-info hidden" id="verboseBox" role="alert">
+		<p id="verboseMSG">asd</p>
+	</div>
+</div>
 <div class="col-lg-12">
-	
-
-	<div class="col-lg-6">
-		<div id="printerStatus">
-			 Dev text:<a class="lightgreen" id="tempCounter"></a>
-		</div>
-		<div>
-		<h5>
-			<div class="progress" id="paperUsageBar">
+<div class="progress" id="paperUsageBar">
 				<div class="progress-bar progress-bar-success progress-bar-striped" id="paperUsageBarSuc" role="progressbar" style="width:0%">
 				Available
 				</div>
@@ -107,15 +104,26 @@ Server status: Checking</p>
 				Printer status and quota will be populated after login.
 				</div>
 			</div>
+</div>
+<div class="col-lg-12">
+	
+
+	<div class="col-lg-4">
+		<div>
+		<h5>
+			
 			Total available quota: <a class="lightgreen" id="availQuota" data-toggle="tooltip" title="" data-original-title="You can print this amount"> 0 </a> pages
 			<br>
 			Overdraft: <a class="orange" id="overdraft" data-toggle="tooltip" title="" data-original-title="You can exceed paper usage by this amount"> 0 </a> pages
 			<br>
 			Paper usage: <a class="red" id="paperUsage" data-toggle="tooltip" title="" data-original-title="You consumed this amount"> 0 </a> pages
-		</h5>			
+		</h5>		
+				<div id="printerStatus">
+			 Dev text:<a class="lightgreen" id="tempCounter"></a>
+		</div>
 		</div>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-4">
 	<h5>
 		<div id="filedrag" style="display: block;">Drop or click to add pdf file here! </div>
 		<input id="fileSelect" type="file" name="file" class="hidden" accept="application/pdf">
@@ -124,20 +132,26 @@ Server status: Checking</p>
 			-->
 			<input id="submitButton" type="submit" value="Print it!">
 			<div>Notice: this application prints your pdf documents and consumes your available quotas.<br>File restriction of < 2mb and pdf files only</div>
-			Upload to server: <a id="uploadServer"></a>
-			<br>
-			Upload to sunfire: <a id="uploadSunfire"></a>
-			<br>
-			Conversion: <a id="uploadConvertPS"></a>
-			<br>
-			Send to printer: <a id="uploadPrint"></a>
-			
-
 			
 		</form>
 	</h5>
 	</div>
-	
+	<div class="col-lg-4">
+	<div style="margin-top:1em;">
+		<div id="uploadBoxServer" class="uploadMessageBox uploadAnimation">
+			<h5>Upload to server</h5><h5 id="uploadServer"></h5>
+		</div>
+		<div id="uploadBoxSunfire" class="uploadMessageBox uploadAnimation">
+			<h5>Upload to sunfire</h5><h5 id="uploadSunfire"></h5>
+		</div >
+		<div id="uploadBoxPS" class="uploadMessageBox uploadAnimation">
+			<h5>Conversion</h5><h5 id="uploadConvertPS"></h5>
+		</div>
+		<div id="uploadBoxPrint" class="uploadMessageBox uploadAnimation">
+			<h5>Send to printer</h5><h5 id="uploadPrint"></h5>
+		</div>
+	</div>
+	</div>
 </div>
 <div class="col-lg-12 divcenter noselect">
 	<h2>Printer Selection</h2>
@@ -182,7 +196,7 @@ Server status: Checking</p>
 
   
 <footer class="footer">
-<h5>Thanks for using SOCPrint! © 2015 | <a href="#">About Us</a></h5>
+<h5>Thanks for using SOCPrint! © 2015 | <a href="#">About Us</a> | <input type="checkbox" id="isVerbose"> Show verbose messages</h5>
 </footer>
 </div>
 
