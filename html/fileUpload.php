@@ -77,10 +77,11 @@ Last update 26 June 2015
 	// If no problems with uploading 
 	
 	$message = "";
+	$finalFileName = "$userName" . "_" . "$fileName";
 	if ($_FILES["file"]["error"] == UPLOAD_ERR_OK) 
 	{
 		$tmp_name = $_FILES["file"]["tmp_name"];
-		move_uploaded_file($tmp_name, "$uploads_dir/$fileName");
+		move_uploaded_file($tmp_name, "$uploads_dir/$finalFileName");
 		$message = "OK";
 		//uploadToSunfire($userName, $userPass, $uploads_dir, $fileName);
 	}
@@ -88,7 +89,7 @@ Last update 26 June 2015
 	{
 		$message = codeToMessage($_FILES["file"]["error"]);
 	}
-	$array = array("fileName" => $fileName, "fileSize" => $fileSize, "fileType" => $fileType, "status" => $message);
+	$array = array("fileName" => $finalFileName, "fileSize" => $fileSize, "fileType" => $fileType, "status" => $message);
 	echo json_encode($array);
 	// End refactor
 
