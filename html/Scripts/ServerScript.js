@@ -144,7 +144,7 @@ function devFunc_temp()
 var printer = "";
 function checkPrinterSelection()
 {
-	printer = window.location.hash.substring(1);
+	//printer = window.location.hash.substring(1);
 	
 	// Check if string value is empty
 	if(typeof printer === "undefined")
@@ -305,6 +305,18 @@ $(document).ready(function()
 		filedrag.style.display = "block";
 
 	}
+	
+	// Event scripts for printer selection
+	//var psts = ;
+	document.getElementById("psts").addEventListener("click", function(){
+		PrinterSelectHandler($("#psts"))	
+		}, false);
+	document.getElementById("pstsb").addEventListener("click", function(){
+		PrinterSelectHandler($("#pstsb"))	
+		}, false);
+	document.getElementById("pstsc").addEventListener("click", function(){
+		PrinterSelectHandler($("#pstsc"))	
+		}, false);
 });
 
 // File drag hover
@@ -356,6 +368,14 @@ function ParseFile(file)
 	}
 }
 
+function PrinterSelectHandler(which_Printer){
+	$("#psts").removeClass("select");
+	$("#pstsb").removeClass("select");
+	$("#pstsc").removeClass("select");
+	which_Printer.addClass("select");
+	printer = which_Printer.prop("id");
+	//alert(printer.prop("id"));
+}
 function uploadToSunfire(fileName)
 {
 	var oOutput = document.getElementById("uploadSunfire");

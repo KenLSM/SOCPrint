@@ -63,7 +63,7 @@ header {
 body {
     background-color: #ECECEA;
 }
-.printerSelected {
+.printerSelection {
     cursor: pointer;
     color: black;
     border-radius: .2em;
@@ -82,7 +82,11 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
-.printerSelected:target {
+.printerSelection:hover {
+    text-decoration:none;
+    background-color: lemonchiffon;
+}
+.printerSelection.select {
     text-decoration: none;
     background-color: lemonchiffon;
     box-shadow: inset 3px 4px #888;
