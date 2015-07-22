@@ -89,7 +89,7 @@ Last update 26 June 2015
 	{
 		$message = codeToMessage($_FILES["file"]["error"]);
 	}
-	$array = array("fileName" => $finalFileName, "fileSize" => $fileSize, "fileType" => $fileType, "status" => $message);
+	$array = array("fileName" => $fileName, "fileSize" => $fileSize, "fileType" => $fileType, "status" => $message);
 	echo json_encode($array);
 	// End refactor
 

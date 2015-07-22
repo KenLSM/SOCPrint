@@ -216,8 +216,9 @@ $(document).ready(function()
 
 	var form = document.forms.namedItem("uploadFile");
 
-	form.addEventListener("submit", function(ev, ef)
+	form.addEventListener("click", function(ev, ef)
 	{
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 		var isLoggedIn = document.getElementById("login").innerHTML;
 		var loginMSG = document.getElementById("loginMSG");
 

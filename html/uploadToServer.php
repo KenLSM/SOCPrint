@@ -1,7 +1,7 @@
 <?php
 	/*
 	PHP Page used for uploading file to sunfire
-	Last update 27 June 2015
+	Last update 22 July 2015
 	*/
 	include('Net/SFTP.php');
 
@@ -27,8 +27,8 @@
 	else
 	{
 		$message = "OK";
-		$fullDir = "$uploads_dir/$fileName";
-		$sftp->put("SP_UP_$fileName", $fullDir, NET_SFTP_LOCAL_FILE);
+		$fullDir = "$uploads_dir/$userName"."_$fileName";
+		$sftp->put("socPrint/SP_UP_$fileName", $fullDir, NET_SFTP_LOCAL_FILE);
 	}
 
 	// puts a three-byte file named filename.remote on the SFTP server
