@@ -1,16 +1,8 @@
 <?php
 
-$FILE_DIR = "/user/k/kenlsm/public_html/files/nup_pdf.jar";
+	$FILE_DIR = "/user/k/kenlsm/public_html/files/nup_pdf.jar";
 // To locate if the required file exist. If it doesnt, tries to fetch the file
-function locateFile()
-{
-	$msg = $ssh->exec("if [ -f socPrint/nup_pdf.jar ]; then echo 1; else echo 2; fi");
-	if($msg == "2")
-	{
-		// File is not found in user's directory, so we copy over from my public folder
-		$ssh->exec("cp $FILE_DIR socPrint/nup_pdf.jar");
-	}
-}
+
 	include('Net/SSH2.php');
 
 	$serverAddr = "sunfire-r.comp.nus.edu.sg";
@@ -48,6 +40,7 @@ function locateFile()
 				$finalFileName = "SP_UP_$fileName";
 				break;
 			case "2PP":
+				locateFile();
 				// run script (java -jar nup_pdf <input> <output> <page #> <options>)
 				// -b option is for page borders
 				 $ssh->exec("java -jar socPrint/nup_pdf.jar socPrint/SP_UP_$fileName.pdf socPrint/SP_FO_$fileName.pdf 2 -b");
@@ -55,10 +48,12 @@ function locateFile()
 				 //echo $pageLayout;
 				 break;
 			 case "4PP":
+				 locateFile();
 				 $ssh->exec("java -jar socPrint/nup_pdf.jar socPrint/SP_UP_$fileName.pdf socPrint/SP_FO_$fileName.pdf 4 -b");
 				 $finalFileName = "SP_FO_$fileName";
 				 break;
 			 case "6PP":
+				 locateFile();
 				 $ssh->exec("java -jar socPrint/nup_pdf.jar socPrint/SP_UP_$fileName.pdf socPrint/SP_FO_$fileName.pdf 6 -b");
 				 $finalFileName = "SP_FO_$fileName";
 				 break;
@@ -89,4 +84,16 @@ function locateFile()
 	
 	$array = array("verbose" => $verbose, "status" => $message, "error" =>$errorMSG);
 	echo json_encode($array);
+	
+function locateFile()
+{
+	global $FILE_DIR, $ssh;
+	$msg = $ssh->exec("if [ -f socPrint/nup_pdf.jar ]; then echo 1; else echo 2; fi");
+	if($msg == 2)
+	{
+		// File is not found in user's directory, so we copy over from my public folder
+		$ssh->exec("cp $FILE_DIR socPrint/nup_pdf.jar");
+
+	}
+}
 ?>
