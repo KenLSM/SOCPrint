@@ -168,6 +168,32 @@ function checkPrinterSelection()
 	}
 }
 
+var pageLayout ="";
+function CheckPageLayoutSelection()
+{
+	if(typeof pageLayout === "undefined")
+	{
+		return false;
+	}
+	
+	switch (pageLayout)
+	{
+		case "1PP":
+			return true;
+
+		case "2PP":
+			return true;
+
+		case "4PP":
+			return true;
+			
+		case "6PP":
+			return true;
+			
+		default:
+			return false;
+	}
+}
 // Function to check if a file is selected
 // Returns true is file is selected
 var GLOBAL_File;
@@ -199,7 +225,7 @@ $(document).ready(function()
 		if (isLoggedIn == "Login")
 		{
 			openAlert();
-			changeAlertMSG("Please login first!", ALERT_DANGER);
+			changeAlertMSG("Please <b>login</b> first!", ALERT_DANGER);
 		}
 		// Check if printer is selected or not
 		else if (checkPrinterSelection() === false)
@@ -210,7 +236,12 @@ $(document).ready(function()
 		else if (checkFileSelection() === false)
 		{
 			openAlert();
-			changeAlertMSG("You have to give me a file to print! >:(", ALERT_DANGER);
+			changeAlertMSG("You have to give me a <b>file</b> to print! >:(", ALERT_DANGER);
+		}
+		else if(CheckPageLayoutSelection() === false)
+		{
+			openAlert();
+			changeAlertMSG("You have to tell me what <b>layout</b> you want!", ALERT_DANGER);
 		}
 		else
 		{
@@ -317,6 +348,20 @@ $(document).ready(function()
 	document.getElementById("pstsc").addEventListener("click", function(){
 		PrinterSelectHandler($("#pstsc"))	
 		}, false);
+		
+	// Event scripts for layout selection
+	document.getElementById("1PP").addEventListener("click", function(){
+		PageLayoutSelectHandler($("#1PP"))	
+		}, false);
+	document.getElementById("2PP").addEventListener("click", function(){
+		PageLayoutSelectHandler($("#2PP"))	
+		}, false);
+	document.getElementById("4PP").addEventListener("click", function(){
+		PageLayoutSelectHandler($("#4PP"))	
+		}, false);
+	document.getElementById("6PP").addEventListener("click", function(){
+		PageLayoutSelectHandler($("#6PP"))	
+		}, false);
 });
 
 // File drag hover
@@ -376,6 +421,17 @@ function PrinterSelectHandler(which_Printer){
 	printer = which_Printer.prop("id");
 	//alert(printer.prop("id"));
 }
+
+// For choosing 1,2,4, 6 layout
+function PageLayoutSelectHandler(which_layout){
+	$("#1PP").removeClass("select");
+	$("#2PP").removeClass("select");
+	$("#4PP").removeClass("select");	
+	$("#6PP").removeClass("select");
+	which_layout.addClass("select");
+	pageLayout = which_layout.prop("id");
+	//alert(which_layout);
+}
 function uploadToSunfire(fileName)
 {
 	var oOutput = document.getElementById("uploadSunfire");
@@ -421,6 +477,7 @@ function convertToPS(fileName)
 	formData.append("username", document.getElementById("username").value);
 	formData.append("password", document.getElementById("password").value);
 	formData.append("fileName", fileName);
+	formData.append("pageLayout", pageLayout);
 	$.ajax(
 	{
 		type: 'post',
