@@ -43,11 +43,11 @@ h3{
 }
 .uploadAnimation
 {
-    -webkit-transition: border linear .2s, box-shadow linear .2s;
-    -moz-transition: border linear .2s, box-shadow linear .2s;
-    -o-transition: border linear .2s, box-shadow linear .2s;
-    transition: border linear .2s, box-shadow linear .2s;
-    transition: background-color 0.4s;
+    -webkit-transition: border linear .4s, box-shadow linear .4s;
+    -moz-transition: border linear .4s, box-shadow linear .4s;
+    -o-transition: border linear .4s, box-shadow linear .4s;
+    transition: border linear .4s, box-shadow linear .4s;
+    transition: background-color .4s;
 }
 .progress-bar{
 	font-size:1em;
@@ -94,11 +94,10 @@ body {
     color: black;
     border-radius: .2em;
     border: 1px solid #cccccc;
-    -webkit-transition: border linear .2s, box-shadow linear .2s;
-    -moz-transition: border linear .2s, box-shadow linear .2s;
-    -o-transition: border linear .2s, box-shadow linear .2s;
-    transition: border linear .2s, box-shadow linear .2s;
-    transition: background-color 0.4s;
+    -webkit-transition: border linear .1s, box-shadow linear .1s, background-color .4s;
+    -moz-transition: border linear .1s, box-shadow linear .1s, background-color .4s;
+    -o-transition: border linear .1s, box-shadow linear .1s, background-color .4s;
+    transition: border linear .1s, box-shadow linear .1s, background-color .4s;
 }
 .noselect {
     -webkit-touch-callout: none;
