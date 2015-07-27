@@ -133,22 +133,8 @@ body {
     background-color: #2D6A8C;
     border-color: transparent;
 }
-.bheader {
-    height: 10em;
-}
 .progress {
     margin-bottom: 0px;
-}
-table#header {
-    width: 100%;
-    color: white;
-}
-table#header tr,
-td {
-    width: auto;
-}
-td#loginBox {
-    padding-right: 0em;
 }
 p#serverStatus {
     font-weight: bold;
