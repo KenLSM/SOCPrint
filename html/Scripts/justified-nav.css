@@ -107,6 +107,14 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+.panel-shadow:hover {
+	--webkit-transition: box-shadow linear .1s;
+	-moz-transition: box-shadow linear .1s;
+	transition: box-shadow linear .1s;
+	-webkit-box-shadow: 0 8px 6px -6px silver;
+	-moz-box-shadow: 0 8px 6px -6px silver;
+	box-shadow: 0 8px 6px -6px silver;
+}
 .printerSelection:hover {
     text-decoration:none;
     background-color: lemonchiffon;
