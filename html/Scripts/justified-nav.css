@@ -171,9 +171,8 @@ button.close.closeright{
     color: black;
     padding-left: 10px;
     border: 2px solid #3BA2AC;
-    height: 2.5em;
-    margin: 1px;
-    margin-left: -5px;
+    height: 3em;
+    margin: auto;
     font-size: 1em;
 }
 input.textbox {
@@ -198,22 +197,25 @@ dy {
     padding-top: 20px;
 }
 .loginBtn#login {
-    font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
     display: inline-block;
     color: #FFFFFF;
-    background-color: #0099FF;
+    background-color: #5bc0de;
     font-weight: bold;
     font-size: 1em;
     text-align: center;
     text-decoration: none;
-    border: 1px solid #296A7B;
     border-radius: 5px;
     white-space: nowrap;
     vertical-align: middle;
     padding: 0.8em;
+    width: 100%;
+    
+    border: 1px solid #0099FF;
+    
+    transition: background-color linear .1s, color linear .1s;
 }
 .loginBtn#login:hover {
-    color: #0099FF;
+    color: #5bc0de;
     background-color: #FFFFFF;
 }
 a:hover {
