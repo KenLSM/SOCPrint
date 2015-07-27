@@ -30,6 +30,7 @@ h3{
   padding-bottom:1em;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  min-width: 320px;
   }
 .divcenter {
     text-align: center;
@@ -164,6 +165,17 @@ p#serverStatus {
 button.close.closeright{
 	right: 0px;
 }
+.userLogin{
+    width: 100%;
+    border-radius: 3px 3px 3px 3px;
+    color: black;
+    padding-left: 10px;
+    border: 2px solid #3BA2AC;
+    height: 2.5em;
+    margin: 1px;
+    margin-left: -5px;
+    font-size: 1em;
+}
 input.textbox {
     width: 25em;
     border-radius: 3px 3px 3px 3px;
@@ -172,14 +184,7 @@ input.textbox {
     border: 2px solid #3BA2AC;
     height: 2.5em;
     margin: 1px;
-    font-size: 50%;
-}
-tr#loginStatus {
-    font-size: 40%;
-    height: 1em;
-    padding: 0;
-    margin: 0;
-}
+} 
 h5 {
     color: DimGrey;
     font-size: 1em;
@@ -235,10 +240,7 @@ a.orange {
     margin-top: 40px;
     border-top: 1px solid #296A7B;
 }
-@media (max-width: 1000px) {
-    .navbar-header {
-	float: none;
-    }
+@media (max-width: 200px) {
     .navbar-toggle {
 	display: block;
     }
@@ -248,10 +250,6 @@ a.orange {
     }
     .navbar-collapse.collapse {
 	display: none!important;
-    }
-    .navbar-nav {
-	float: none!important;
-	margin: 7.5px -15px;
     }
     .navbar-nav>li {
 	float: none;
@@ -271,6 +269,13 @@ a.orange {
     }
     .collapsing {
 	overflow: hidden!important;
+    }
+}
+@media (min-width: 992px){
+	/* to correct the resizing of .col when < 992px */
+    .col-md-offset-4{
+    margin-left: 20%;
+    width: 60%
     }
 }
 .hidden {
