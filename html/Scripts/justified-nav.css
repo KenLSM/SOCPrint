@@ -37,18 +37,17 @@ h3{
 }
 .uploadMessageBox{
     height: 4em;  
-    border: 1px solid #cccccc;
+    border: 1px solid white;
     border-radius: 5px;
     background-color: #5bc0de;
     white-space: nowrap;
 }
 .uploadAnimation
 {
-    -webkit-transition: border linear .4s, box-shadow linear .4s;
-    -moz-transition: border linear .4s, box-shadow linear .4s;
-    -o-transition: border linear .4s, box-shadow linear .4s;
-    transition: border linear .4s, box-shadow linear .4s;
-    transition: background-color .4s;
+    -webkit-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
+    -moz-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
+    -o-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
+    transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
 }
 .progress-bar{
 	font-size:1em;
@@ -65,14 +64,17 @@ h3{
 }
 .uploadDone{
     background-color: #5cb85c ;
+    margin-left: 1em;
 }
 .uploadSelect{
     background-color: #f0ad4e  ;
-    box-shadow: inset 3px 4px #888;
+    margin-left: 1em;
+    abox-shadow: inset 3px 4px #888;
 }
 .uploadError{
     background-color: #d9534f ;
-    box-shadow: inset 3px 4px #888;
+    margin-left: 1em;
+    abox-shadow: inset 3px 4px #888;
 }
 header {
     width: 100%;
