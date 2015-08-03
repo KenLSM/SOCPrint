@@ -26,6 +26,8 @@
 	}
 	else
 	{
+		// Check and create folder if doesnt exist
+		$sftp->exec("if [ -d socPrint ]; then echo 1; else mkdir socPrint; fi");
 		$message = "OK";
 		$fullDir = "$uploads_dir/$userName"."_$fileName";
 		$sftp->put("socPrint/SP_UP_$fileName", $fullDir, NET_SFTP_LOCAL_FILE);

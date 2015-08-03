@@ -31,7 +31,6 @@
 	}
 	else
 	{
-		
 		switch($pageLayout)
 		{
 			case "1PP":
@@ -87,7 +86,10 @@
 	
 function locateFile()
 {
+
 	global $FILE_DIR, $ssh;
+	
+	
 	$msg = $ssh->exec("if [ -f socPrint/nup_pdf.jar ]; then echo 1; else echo 2; fi");
 	if($msg == 2)
 	{
