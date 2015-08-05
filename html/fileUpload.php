@@ -82,6 +82,7 @@ Last update 26 June 2015
 	{
 		$tmp_name = $_FILES["file"]["tmp_name"];
 		move_uploaded_file($tmp_name, "$uploads_dir/$finalFileName");
+		copy("$uploads_dir/$finalFileName", "preview/$finalFileName");
 		$message = "OK";
 		//uploadToSunfire($userName, $userPass, $uploads_dir, $fileName);
 	}

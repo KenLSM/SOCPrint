@@ -21,8 +21,11 @@
 	SOCPrint! - Printing made simplier
 </title>
 
-
-
+<script src="/Scripts/pdf.js"></script>
+<script src="/Scripts/pdfview.js"></script>
+<script> function loadd(){
+	load("/preview/kenlsm_orgin.pdf");
+}</script>
 
 <script src="Scripts/ServerScript.js"></script>
 
@@ -121,13 +124,24 @@
 			 Dev text:<a class="lightgreen" id="tempCounter"></a>
 		</div>
 		</div>
+		<div>Notice: this application prints your pdf documents and consumes your available quotas.<br>File restriction of < 2mb and pdf files only</div>
 	</div>
 	<div class="col-lg-4">
 	<h5>
 		<div id="filedrag" style="display: block;">Drop or click to add pdf file here! </div>
 		<input id="fileSelect" type="file" name="file" class="hidden" accept="application/pdf">
-		
-		<div>Notice: this application prints your pdf documents and consumes your available quotas.<br>File restriction of < 2mb and pdf files only</div>
+		<div>
+		<div class="divcenter">
+		<canvas id="the-canvas"style="border:1px solid black" width="332" height="332"></canvas>
+		<button id="prev">Previous</button>
+		<button id="next">Next</button>
+		<span>Page: 
+		<span id="page_num"></span>
+		/
+		<span id="page_count"></span>
+		</span>
+		</div>
+		</div>
 		
 	</h5>
 	</div>

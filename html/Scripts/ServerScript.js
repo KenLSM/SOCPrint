@@ -272,6 +272,7 @@ $(document).ready(function()
 							changeVerboseMSG("You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType);
 							changeUpload(UPLOADBOX_SERVER);
 							uploadToSunfire(obj.fileName);
+							load("/preview/" + document.getElementById("username").value + "_" +obj.fileName);
 							break;
 						default:
 							oOutput.innerHTML = "Unsuccessful";

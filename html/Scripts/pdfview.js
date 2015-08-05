@@ -22,7 +22,7 @@ var pdfDoc = null,
     scale = 1,
     canvas = null,//document.getElementById('the-canvas'),
     ctx = null, //canvas.getContext('2d'),
-    max_dimension = 400;
+    max_dimension = 332;
 
 /**
  * Get page info from document, resize canvas accordingly, and render page.
