@@ -28,6 +28,13 @@ h3{
   border-color: #e5e6e9 #dfe0e4 #d0d1d5;
   
   -webkit-border-radius: 3px; 
+  -webkit-transition: border linear .1s, box-shadow linear .1s, background-color .4s;
+  -moz-transition: border linear .1s, box-shadow linear .1s, background-color .4s;
+  -o-transition: border linear .1s, box-shadow linear .1s, background-color .4s;
+  transition: border linear .1s, box-shadow linear .1s, background-color .4s;
+}
+.buttonBox:hover{
+  background-color: lemonchiffon;
 }
 .white-box{
   background:white; 
@@ -41,21 +48,21 @@ h3{
   min-width: 320px;
   }
 .divcenter {
-    text-align: center;
+  text-align: center;
 }
 .uploadMessageBox{
-    height: 4em;  
-    border: 1px solid white;
-    border-radius: 5px;
-    background-color: #5bc0de;
-    white-space: nowrap;
+  height: 4em;  
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: #5bc0de;
+  white-space: nowrap;
 }
 .uploadAnimation
 {
-    -webkit-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
-    -moz-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
-    -o-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
-    transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
+  -webkit-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
+  -moz-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
+  -o-transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
+  transition: border linear .4s, box-shadow linear .4s, background-color .4s, margin-left 0.2s;
 }
 .progress-bar{
 	font-size:1em;
