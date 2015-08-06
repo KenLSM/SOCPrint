@@ -336,6 +336,14 @@ $(document).ready(function()
 		filedrag.addEventListener("dragleave", FileDragHover, false);
 		filedrag.addEventListener("drop", FileSelectHandler, false);
 		filedrag.style.display = "block";
+		window.addEventListener("dragover", function(e){
+			e = e || event;
+			e.preventDefault();			
+		}, false);
+		window.addEventListener("drop", function(e){
+			e = e || event;
+			e.preventDefault();
+		}, false);
 
 	}
 	
@@ -438,10 +446,8 @@ function PageLayoutSelectHandler(which_layout){
 
 function uploadToPreview()
 {	
-	//var oOutput = document.getElementById("uploadServer");
 	var formData = new FormData(document.forms.namedItem("uploadFile"));
 
-	//oOutput.innerHTML = "Calculating transfer vectors..."
 	formData.append("file", GLOBAL_File, GLOBAL_File.name);
 	$.ajax(
 	{

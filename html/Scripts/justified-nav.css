@@ -21,6 +21,14 @@ h3{
   padding-left: 1em;
   
 }
+.buttonBox{
+  height: 2em;
+  width: 156px;
+  background: white;
+  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+  
+  -webkit-border-radius: 3px; 
+}
 .white-box{
   background:white; 
   border: 1px solid;

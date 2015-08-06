@@ -94,7 +94,7 @@
 
 
 <div class="col-lg-12 white-box panel-shadow" >
-	
+	<h3>PDF Selection</h3>
 	<div class="progress" id="paperUsageBar">
 		<div class="progress-bar progress-bar-success progress-bar-striped" id="paperUsageBarSuc" role="progressbar" style="width:0%">
 		Available
@@ -124,26 +124,32 @@
 			 Dev text:<a class="lightgreen" id="tempCounter"></a>
 		</div>
 		</div>
-		<div>Notice: this application prints your pdf documents and consumes your available quotas.<br>File restriction of < 2mb and pdf files only</div>
+		<div>Notice: 
+		<br>
+		This application prints your pdf documents and consumes your available quotas.
+		<br>File restriction of < 2mb and pdf files only
+		<br>Disconnecting halfway may cause your printing operation to not succeed.
+		</div>
 	</div>
 	<div class="col-lg-4">
 	<h5>
 		
 		<div id="filedrag" style="display: block;">			
-			Drop or click to add pdf file below! 
+			Drop or click to add pdf file here! 
 		</div>
 		<input id="fileSelect" type="file" name="file" class="hidden" accept="application/pdf">
 		<div>
 		<div class="divcenter">
-		<canvas id="the-canvas"style="border:1px solid black" width="332" height="332"></canvas>
-		<button id="prev">Previous</button>
-		<button id="next">Next</button>
-		
-		<span>Page: 
-		<span id="page_num"></span>
-		/
-		<span id="page_count"></span>
-		</span>
+			<canvas id="the-canvas" class="noselect" style="border:1px solid black" width="332" height="332"></canvas>
+			<br>
+			<button class="buttonBox" id="prev">Previous</button>
+			<button class="buttonBox" id="next">Next</button>
+			<br>
+			<span>Page
+			<span id="page_num">1</span>
+			of
+			<span id="page_count">1</span>
+			</span>
 		</div>
 		</div>
 		
