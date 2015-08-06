@@ -53,12 +53,9 @@ Last update 26 June 2015
 	// End snippet
 	
 	
+	// Setting up params 
 	
-	// Setting up params
-	
-	$userName =  $_POST["username"];
-	$userPass = $_POST["password"];
-	$uploads_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads";
+	$uploads_dir = $_SERVER["DOCUMENT_ROOT"] . "/preview";
 	
 	// Getting received file details
 	$fileName = $_FILES["file"]["name"];
@@ -66,22 +63,11 @@ Last update 26 June 2015
 	$fileType = $_FILES["file"]["type"];
 	
 	$fileSize = formatBytes($fileSize);
-	
-	// Might need to do some security checking here
-		// Check for 
-		// filename limit < 255 char
-		// extension type if is valid type. Dont process if invalid file type. Can detect in client side
-		// size is < than 50mb?
-	
-	// Refactored code
-	// If no problems with uploading 
-	
 	$message = "";
-	$finalFileName = "$userName" . "_" . "$fileName";
 	if ($_FILES["file"]["error"] == UPLOAD_ERR_OK) 
 	{
 		$tmp_name = $_FILES["file"]["tmp_name"];
-		move_uploaded_file($tmp_name, "$uploads_dir/$finalFileName");
+		move_uploaded_file($tmp_name, "$uploads_dir/$fileName");
 		//copy("$uploads_dir/$finalFileName", "preview/$finalFileName");
 		$message = "OK";
 		//uploadToSunfire($userName, $userPass, $uploads_dir, $fileName);
@@ -92,41 +78,4 @@ Last update 26 June 2015
 	}
 	$array = array("fileName" => $fileName, "fileSize" => $fileSize, "fileType" => $fileType, "status" => $message);
 	echo json_encode($array);
-	// End refactor
-
-
-	/*
-	//include('Net/SFTP.php');
-	function uploadToSunfire($userName, $userPass, $uploads_dir, $fileName)
-	{
-		// upload to sunfire from server
-		$serverAddr = "sunfire-r.comp.nus.edu.sg";
-		$serverPort = 22;
-		$sftp = new Net_SFTP($serverAddr);
-		echo "<br>";
-		if(!$sftp)
-		{
-			echo "NO_CONNECTION";
-		}
-		if (!$sftp->login($userName, $userPass))
-		{
-			echo "WRONG";
-		}
-		else
-		{
-			echo "Sunfire login OK";
-		}
-
-		// puts a three-byte file named filename.remote on the SFTP server
-		//$sftp->put('filename.remote', 'xxx');
-		// puts an x-byte file named filename.remote on the SFTP server,
-		// where x is the size of filename.local
-		//$sftp->put('filename.remote', 'temp.txt');//, NET_SFTP_LOCAL_FILE);
-		$fullDir = "$uploads_dir/$fileName";
-		$sftp->put("SOCPRINT_UPLOAD" . $fileName, $fullDir, NET_SFTP_LOCAL_FILE);
-		echo "<br>If no other message appear then UPLOAD OK!";
-		echo "<br> File is name is SOCPRINT_UPLOAD$fileName";
-		
-	}
-	*/
 ?>

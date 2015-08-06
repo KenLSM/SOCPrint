@@ -272,7 +272,7 @@ $(document).ready(function()
 							changeVerboseMSG("You uploaded: " + obj.fileName + "<br> Size of " + obj.fileSize + " and file type of " + obj.fileType);
 							changeUpload(UPLOADBOX_SERVER);
 							uploadToSunfire(obj.fileName);
-							load("/preview/" + document.getElementById("username").value + "_" +obj.fileName);
+							//load("/preview/" + document.getElementById("username").value + "_" +obj.fileName);
 							break;
 						default:
 							oOutput.innerHTML = "Unsuccessful";
@@ -406,6 +406,7 @@ function ParseFile(file)
 		
 		// Update the text in filedrag 
 		document.getElementById("filedrag").innerHTML = file.name;
+		uploadToPreview();
 	}
 	// If pdf not received, display alert box reminding user
 	else
@@ -433,6 +434,36 @@ function PageLayoutSelectHandler(which_layout){
 	which_layout.addClass("select");
 	pageLayout = which_layout.prop("id");
 	//alert(which_layout);
+}
+
+function uploadToPreview()
+{	
+	//var oOutput = document.getElementById("uploadServer");
+	var formData = new FormData(document.forms.namedItem("uploadFile"));
+
+	//oOutput.innerHTML = "Calculating transfer vectors..."
+	formData.append("file", GLOBAL_File, GLOBAL_File.name);
+	$.ajax(
+	{
+		type: 'post',
+		url: 'filePreview.php',
+		data: formData,
+		success: function(data)
+		{
+			var obj = JSON.parse(data);
+
+			switch (obj.status)
+			{
+				case "OK":
+					load("/preview/" + obj.fileName);
+					break;
+				default:
+					break;
+			}
+		},
+		contentType: false,
+		processData: false
+	})
 }
 function uploadToSunfire(fileName)
 {
