@@ -31,9 +31,22 @@
 	{
 		$message = "OK";
 		
+		/* Moved to checkPrintQueue.php
+		$data = fopen("http://www.comp.nus.edu.sg/~kenlsm/psts.txt", "rb");
+		$Ppsts = stream_get_contents($data);
+		
+		$data = fopen("http://www.comp.nus.edu.sg/~kenlsm/pstsb.txt", "rb");
+		$Ppstsb = stream_get_contents($data);
+		
+		$data = fopen("http://www.comp.nus.edu.sg/~kenlsm/pstsc.txt", "rb");
+		$Ppstsc = stream_get_contents($data);
+		
+		/* Old pqueue 
 		$Ppsts = $ssh->exec('lpq -Ppsts');
 		$Ppstsb = $ssh->exec('lpq -Ppstsb');
 		$Ppstsc = $ssh->exec('lpq -Ppstsc');
+		*/
+		
 		// Clearing off the stream of login message
 		$ssh->read("~ \$");
 		$ssh->write("pusage \n");

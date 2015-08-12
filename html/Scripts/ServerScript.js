@@ -213,6 +213,7 @@ function checkFileSelection()
 // Initial call to set up listeners etc
 $(document).ready(function()
 {
+	getPrinterQueue();
 
 	var form = document.forms.namedItem("uploadFile");
 
@@ -605,6 +606,41 @@ function checkServer()
 
 
 }
+function replaceHTMl(_whichString)
+{
+	var res = _whichString.split(/\s+/);
+	var str = "";
+	if(_whichString != "\n")
+	{
+		str = res[1] + " | " + res[3];
+	}
+	else
+	{
+		str = "no entries";
+	}
+	return str;
+}
+function getPrinterQueue()
+{
+	$.ajax({
+		url: 'checkPrintQueue.php',
+		success: function(data)
+		{
+			var obj = JSON.parse(data);
+			/*
+			document.getElementById("ppsts").innerHTML = obj.Ppsts;
+			document.getElementById("ppstsb").innerHTML = obj.Ppstsb;
+			document.getElementById("ppstsc").innerHTML = obj.Ppstsc;
+			*/
+			document.getElementById("ppsts").innerHTML = replaceHTMl(obj.Ppsts);
+			document.getElementById("ppstsb").innerHTML = replaceHTMl(obj.Ppstsb);
+			document.getElementById("ppstsc").innerHTML = replaceHTMl(obj.Ppstsc);
+			
+			setTimeout(getPrinterQueue, 5000);
+		}
+	});	
+}
+
 // xmlhttp version
 function sendCommand()
 {
@@ -624,10 +660,17 @@ function sendCommand()
 			switch (obj.message)
 			{
 				case "OK":
+					
+					
+					
+					/*
+					// Old script for printing fetch
 					document.getElementById("ppsts").innerHTML = obj.Ppsts;
 					document.getElementById("ppstsb").innerHTML = obj.Ppstsb;
 					document.getElementById("ppstsc").innerHTML = obj.Ppstsc;
-
+					// End
+					*/
+					
 					document.getElementById("paperUsage").innerHTML = obj.paperUsage;
 					document.getElementById("availQuota").innerHTML = obj.availQuota;
 					document.getElementById("overdraft").innerHTML = obj.overdraft;
