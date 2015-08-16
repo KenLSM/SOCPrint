@@ -1,0 +1,29 @@
+h1
+{
+	font-size: 4em;
+}
+.center
+{
+	margin: auto;
+	text-align: center;
+}
+div
+{
+	margin: auto;
+	transition: background-color 2s; 
+}
+
+.red
+{ 
+	background-color: #FF0033;
+}
+
+.green
+{
+	background-color: #00FF33;
+}
+.hidden
+{
+	height: 20%;
+	display: none;
+}
