@@ -29,7 +29,7 @@
 	{
 		if($printer === "psts" || $printer === "pstsb" || $printer === "pstsc")
 		{	
-			//$message  = $ssh->exec('lpr -P $printer \'socPrint/' . $fileName . '.ps\'');
+			$message  = $ssh->exec('lpr -P ' . $printer . ' \'socPrint/' . $fileName . '.ps\'');
 		}
 		else
 		{
