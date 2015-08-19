@@ -31,6 +31,7 @@
 	}
 	else
 	{
+		//echo 'java -jar socPrint/nup_pdf.jar \'socPrint/SP_UP_' . $fileName . '.pdf\' \'socPrint/SP_FO_' . $fileName . '.pdf\' 2 -b';
 		switch($pageLayout)
 		{
 			case "1PP":
@@ -42,18 +43,18 @@
 				locateFile();
 				// run script (java -jar nup_pdf <input> <output> <page #> <options>)
 				// -b option is for page borders
-				 $ssh->exec("java -jar socPrint/nup_pdf.jar socPrint/SP_UP_$fileName.pdf socPrint/SP_FO_$fileName.pdf 2 -b");
+				 $ssh->exec('java -jar socPrint/nup_pdf.jar \'socPrint/SP_UP_' . $fileName . '.pdf\' \'socPrint/SP_FO_' . $fileName . '.pdf\' 2 -b');
 				 $finalFileName = "SP_FO_$fileName";
 				 //echo $pageLayout;
 				 break;
 			 case "4PP":
 				 locateFile();
-				 $ssh->exec("java -jar socPrint/nup_pdf.jar socPrint/SP_UP_$fileName.pdf socPrint/SP_FO_$fileName.pdf 4 -b");
+				 $ssh->exec('java -jar socPrint/nup_pdf.jar \'socPrint/SP_UP_' . $fileName . '.pdf\' \'socPrint/SP_FO_' . $fileName . '.pdf\' 4 -b');
 				 $finalFileName = "SP_FO_$fileName";
 				 break;
 			 case "6PP":
 				 locateFile();
-				 $ssh->exec("java -jar socPrint/nup_pdf.jar socPrint/SP_UP_$fileName.pdf socPrint/SP_FO_$fileName.pdf 6 -b");
+				 $ssh->exec('java -jar socPrint/nup_pdf.jar \'socPrint/SP_UP_' . $fileName . '.pdf\' \'socPrint/SP_FO_' . $fileName . '.pdf\' 6 -b"');
 				 $finalFileName = "SP_FO_$fileName";
 				 break;
 			default:
@@ -62,17 +63,17 @@
 		}
 		
 		// Command for execution in sunfire: pdftops [input file] [output file]
-		$errorMSG = $ssh->exec("pdftops socPrint/$finalFileName.pdf socPrint/$fileName.ps -level3");
+		$errorMSG = $ssh->exec('pdftops \'socPrint/' . $finalFileName . '.pdf\' \'socPrint/' . $fileName . '.ps\' -level3');
 		
 		
 		// Clearing off the stream of login message
 		$ssh->read("~ \$");
-		$reply = $ssh->exec("if [ -f socPrint/$fileName.ps ]; then echo 1; fi");
+		$reply = $ssh->exec('if [ -f \'socPrint/' . $fileName . '.ps\' ]; then echo 1; fi');
 		switch($reply)
 		{
 			case 1:
 				$message = "OK";
-				$verbose = "File name is socPrint/$fileName.ps";
+				$verbose = 'File name is socPrint/$fileName.ps';
 				break;
 			default:
 				$message = "NO $reply:";

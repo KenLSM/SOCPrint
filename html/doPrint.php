@@ -29,7 +29,7 @@
 	{
 		if($printer === "psts" || $printer === "pstsb" || $printer === "pstsc")
 		{	
-			$message  = $ssh->exec("lpr -P $printer socPrint/$fileName.ps");
+			//$message  = $ssh->exec('lpr -P $printer \'socPrint/' . $fileName . '.ps\'');
 		}
 		else
 		{
@@ -38,7 +38,7 @@
 		// Command for execution in sunfire: pdftops [input file] [output file]
 		//$message  = $ssh->exec("lpr -P psts socPrint/$fileName.ps");
 		$ssh->exec($deleteCommand);
-		$ssh->exec("command rm socPrint/$fileName.ps");
+		$ssh->exec('command rm \'socPrint/' . $fileName . '.ps\'');
 	}
 	
 	$array = array("status" => $message);

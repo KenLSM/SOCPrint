@@ -11,8 +11,8 @@
 	$ssh = new Net_SSH2($serverAddr);
 
 	$message = "";
-	$Ppsts = $userName;
-	$Ppstsb = $userPass;
+	$Ppsts = "";//$userName;
+	$Ppstsb = "";//$userPass;
 	$Ppstsc = "";
 	$paperUsage ="";
 	$availQuota ="";
