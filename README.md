@@ -1,5 +1,5 @@
 SOCPrint
-=
+===
 *Part of NUS Orbital Programme*
 
 Printing app using the browser only!
@@ -13,3 +13,13 @@ Requires:
 
 Other things that you can do:
   * View your print quotas **graphically!**
+
+
+Setup
+===
+This repo requires you to have:
+- `php >= 5.2`
+
+To set this up on your local machine:
+- `git clone` this repo
+- run `bash runserver.sh`
